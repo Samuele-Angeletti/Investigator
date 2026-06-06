@@ -1,0 +1,24 @@
+Io imposterei la jam così:
+
+Prime 2 ore
+
+Player funzionante.
+Scena base esplorabile.
+CaseData, EvidenceNode, EvidenceSystem già creati anche se con dati finti.
+Journal e accusa anche brutti, ma collegati.
+Ore 3-6
+
+Generazione caso.
+Indizi raccoglibili.
+NPC interrogabili.
+Random Walk adattato per piazzare tracce.
+Ore 7-9
+
+BSP o interno procedurale.
+Lente investigativa.
+Cellular Automata solo se non rompe il ritmo: anche una versione semplificata va bene.
+Ore 10-12
+
+Integrazione, playtest, bugfix.
+Tagliare tutto ciò che non serve al loop.
+Assicurarsi che il caso sia completabile dall’inizio alla fine.
