@@ -480,6 +480,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6368428911303713407, guid: 0ee3d99414c537648a09fbf34aa54965, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 456d7df19e229a74cbb9be5422f3f00e, type: 2}
+    - target: {fileID: 6368428911303713407, guid: 0ee3d99414c537648a09fbf34aa54965, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 456d7df19e229a74cbb9be5422f3f00e, type: 2}
+    - target: {fileID: 6368428911303713407, guid: 0ee3d99414c537648a09fbf34aa54965, type: 3}
+      propertyPath: 'm_Materials.Array.data[17]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a2ef7a46380690b45a522ccf4b7b85d6, type: 2}
+    - target: {fileID: 6368428911303713407, guid: 0ee3d99414c537648a09fbf34aa54965, type: 3}
+      propertyPath: 'm_Materials.Array.data[20]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a2ef7a46380690b45a522ccf4b7b85d6, type: 2}
+    - target: {fileID: 6368428911303713407, guid: 0ee3d99414c537648a09fbf34aa54965, type: 3}
+      propertyPath: 'm_Materials.Array.data[21]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a2ef7a46380690b45a522ccf4b7b85d6, type: 2}
+    - target: {fileID: 7485188331625740977, guid: 0ee3d99414c537648a09fbf34aa54965, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8771091787928289351, guid: 0ee3d99414c537648a09fbf34aa54965, type: 3}
       propertyPath: m_Name
       value: Terrain Remaked
