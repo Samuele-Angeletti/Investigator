@@ -9,12 +9,13 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Raycast Settings")]
     [SerializeField] private float _interactionDistance = 3.0f;
     [SerializeField] private LayerMask _interactableLayer;
-
-    
-
     private Camera _mainCamera;
     private StarterAssetsInputs _inputs;
 
+    //Only for Debug
+    private Vector3 _gizmoStart;
+    private Vector3 _gizmoDirection;
+    private bool _hitSomething;
 
 
     private void Awake()
@@ -63,5 +64,28 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-   
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if(_mainCamera==null)
+        {
+            return;
+        }
+
+        if(_hitSomething)
+        {
+            Gizmos.color = Color.green;
+        }
+
+        else
+        {
+            Gizmos.color= Color.red;
+        }
+
+        Gizmos.DrawRay(_gizmoStart, _gizmoDirection * _interactionDistance);
+
+        Gizmos.DrawWireSphere(_gizmoStart + (_gizmoDirection * _interactionDistance), 0.05f);
+    }
+#endif
+
 }
