@@ -29,29 +29,31 @@ Separare i dati investigativi dalla loro rappresentazione in scena o in UI.
 ## Pseudo codice
 
 ```pseudo
-class EvidenceNode:
+ScriptableObject EvidenceNode:
     id
-    position
+    GameObject
     type
-    source
-    visibility
     truthValue
     description
     linkedSuspect
-    isCollected
+    List<tag>
+
+ScriptableObject EvidenceTag:
+    description
 
 class EvidenceSystem:
     allEvidences
-
+    HashSet<> collectedEvidences
+    
     RegisterEvidence(evidence):
         allEvidences.Add(evidence)
         SpawnEvidenceObject(evidence)
 
     CollectEvidence(evidence):
-        if evidence.isCollected:
+        if collectedEvidences.Contains(evidence)
             return
 
-        evidence.isCollected = true
+        collectedEvidences.Add(evidence)
         Journal.Add(evidence)
 ```
 
