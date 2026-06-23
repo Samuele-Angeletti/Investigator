@@ -48,4 +48,8 @@ public class GenerationResult
         }
         return Vector2Int.zero;
     }
+    //public Vector2Int GetRandomRoomPos()
+    //{
+
+    //}
 }
