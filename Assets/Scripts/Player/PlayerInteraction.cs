@@ -51,7 +51,7 @@ public class PlayerInteraction : MonoBehaviour
                 }
                 if (_inputs.interact)
                 {
-                    interactable.Click();
+                    interactable.Interact();
                     _inputs.interact = false;
                 }
                 return;

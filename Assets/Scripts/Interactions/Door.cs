@@ -7,20 +7,20 @@ public class Door : MonoBehaviour, IInteractable
     private Transform _activeWaypoint = null;
     private bool _canInteract = false;
 
-    public void ActivateDoor(Transform targetWaypoint)
+    public void EnterInDoor(Transform targetWaypoint)
     {
         _activeWaypoint = targetWaypoint;
         _canInteract = true;
     }
 
  
-    public void DeactivateDoor()
+    public void ExitFromDoor()
     {
         _activeWaypoint = null;
         _canInteract = false;
     }
 
-    public void Click()
+    public void Interact()
     {
         if (!_canInteract || _activeWaypoint == null) return;
 
