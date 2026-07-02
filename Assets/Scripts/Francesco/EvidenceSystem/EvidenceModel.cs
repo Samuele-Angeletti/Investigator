@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EvidenceModel : MonoBehaviour
+public class EvidenceModel : MonoBehaviour//, IInteractable
 {
     [SerializeField] private EvidenceNode _evidenceNode;
     public EvidenceNode EvidenceNode
@@ -31,5 +31,11 @@ public class EvidenceModel : MonoBehaviour
         _evidenceNode = evidenceNode;
         _isCollected = false;
         _visibility = 0f;
+    }
+
+    public void Interact()
+    {
+        //Journal.Add(this);
+        Destroy(gameObject);
     }
 }
