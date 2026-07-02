@@ -35,7 +35,7 @@ public class EvidenceModel : MonoBehaviour//, IInteractable
 
     public void Interact()
     {
-        //Journal.Add(this);
+        Journal.Instance.AddEvidence(_evidenceNode);
         Destroy(gameObject);
     }
 }
