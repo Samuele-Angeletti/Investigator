@@ -11,6 +11,8 @@ public class UiManager : MonoBehaviour
     [Header("Ui Ref")]
     [SerializeField] private GameObject _interactionPrompt;
     [SerializeField] private TextMeshProUGUI promptText;
+    [SerializeField] private GameObject _investigationPrompt;
+    [SerializeField] private TextMeshProUGUI _investigationPromptText;
 
     [Header("Reticle Settings")]
     [SerializeField] private Image _detectorImage;
@@ -57,6 +59,15 @@ public class UiManager : MonoBehaviour
         if(_interactionPrompt!=null)
         {
             _interactionPrompt.SetActive(visible);
+        }
+    }
+
+    
+    public void ToggleInvestigationMode(bool enabled)
+    {
+        if (_investigationPrompt!=null)
+        {
+            _investigationPrompt.SetActive(enabled);
         }
     }
 }
