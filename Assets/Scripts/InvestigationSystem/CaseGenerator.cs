@@ -11,7 +11,7 @@ public class CaseGenerator : MonoBehaviour
     [SerializeField]
     private List<string> locations = new();
 
-    [SerializeField, Tooltip("Minimum/maximum number of clues generated per case (acceptance criteria: at least 3).")]
+    [SerializeField, Tooltip("Add at least 3 Clues and a Max of 5")]
     private int minClueCount = 3;
     [SerializeField]
     private int maxClueCount = 5;
@@ -41,7 +41,7 @@ public class CaseGenerator : MonoBehaviour
         CurrentCase = new CaseData
         {
             Seed = seed,
-            Victim = "Spider-Man"
+            Victim = "L'uomo Ragno"
         };
 
         CurrentCase.Culprit = suspects[random.Next(suspects.Count)];
