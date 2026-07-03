@@ -12,6 +12,6 @@ public class EvidenceNode : ScriptableObject
     public EEvidenceType EvidenceType;
     [Range(0f,1f)]
     public float TruthValue;
-    public GameObject LinkedSuspect;
+    public Suspect LinkedSuspect;
     public List<EvidenceTag> EvidenceTags;
 }
