@@ -22,6 +22,7 @@ public class NpcHandler : MonoBehaviour, IInteractable
     [SerializeField] private float _destinationReachedDistance = 0.3f;
 
     private GenericStateMachine<ECharactertState> _stateMachine;
+    private GenericStateMachine<ECharacterInfoState> _infoStateMachine;
     private IDialogueProvider _dialogueProvider;
 
     public float IdleDuration => UnityEngine.Random.Range(_minIdleDuration, _maxIdleDuration);
@@ -40,12 +41,17 @@ public class NpcHandler : MonoBehaviour, IInteractable
         _dialogueProvider = GetComponent<IDialogueProvider>();
 
         _stateMachine = new GenericStateMachine<ECharactertState>();
+        _infoStateMachine = new GenericStateMachine<ECharacterInfoState>();
 
         _stateMachine.RegisterState(ECharactertState.Idle, new IdleState(this, _animator));
         _stateMachine.RegisterState(ECharactertState.Walking, new WalkingState(this, _animator));
         _stateMachine.RegisterState(ECharactertState.Talking, new TalkingState(this, _animator));
 
+        _infoStateMachine.RegisterState(ECharacterInfoState.Unaware, new UnawareState(this));
+        _infoStateMachine.RegisterState(ECharacterInfoState.Informed, new InformedState(this));
+
         _stateMachine.SetState(ECharactertState.Idle);
+        SetInfoState(ECharacterInfoState.Unaware);
     }
 
     private void Update() => _stateMachine.OnUpdate();
@@ -143,6 +149,13 @@ public class NpcHandler : MonoBehaviour, IInteractable
         return _agent.remainingDistance <= _destinationReachedDistance;
     }
 
+    #region SET INFO STATE METHODS
+
+    public void SetInfoState(ECharacterInfoState newState)
+    {
+        _infoStateMachine.SetState(newState);
+    }
+    #endregion
 #if UNITY_EDITOR
     private void OnValidate()
     {
