@@ -2,14 +2,9 @@ using UnityEngine;
 
 public class BSPDirector : MonoBehaviour
 {
-    [Header("Simple Walker Settings")]
-    [SerializeField] int gridDimension;
-    [SerializeField] int attempts;
-
     [SerializeField] MeshProceduralGenerator groundMeshGenerator;
     [SerializeField] MeshProceduralGenerator wallMeshGenerator;
     [SerializeField] MeshProceduralGenerator ceilingMeshGenerator;
-    bool[,] grid;
 
     GenerationResult generationResult;
 
