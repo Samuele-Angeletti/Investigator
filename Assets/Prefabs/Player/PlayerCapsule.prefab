@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2050291540387946739}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.375, z: 0}
+  m_LocalPosition: {x: 0, y: 3.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -158,6 +158,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   interact: 0
+  investigate: 0
   analogMovement: 0
   cursorLocked: 0
   cursorInputForLook: 1
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490fd4cdc6d7f3749a2dcd0d4f0c314b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  _interactionDistance: 1
+  _interactionDistance: 5
   _interactableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -422,7 +423,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7773007024830077801, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: Lens.FieldOfView
-      value: 121
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7773007024830077801, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: Priority.Enabled
@@ -440,6 +441,10 @@ PrefabInstance:
       propertyPath: m_StreamingVersion
       value: 20241001
       objectReference: {fileID: 0}
+    - target: {fileID: 7773007024830077801, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
+      propertyPath: Target.TrackingTarget
+      value: 
+      objectReference: {fileID: 6324459773622147113}
     - target: {fileID: 8762286023885395077, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_Name
       value: PlayerFollowCamera

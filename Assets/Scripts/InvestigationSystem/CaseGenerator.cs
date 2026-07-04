@@ -47,6 +47,9 @@ public class CaseGenerator : MonoBehaviour
         CurrentCase.Culprit = suspects[random.Next(suspects.Count)];
         CurrentCase.CrimeLocation = locations[random.Next(locations.Count)];
 
+        // Clear the previous case's evidence so "in system" checks reflect only this case.
+        EvidenceSystem.Instance.ResetGeneratedEvidence();
+
         GenerateEvidenceSet(CurrentCase, random);
         GeneratePath(CurrentCase, random);
 
@@ -99,6 +102,8 @@ public class CaseGenerator : MonoBehaviour
     {
         EvidenceNode runtimeNode = Instantiate(sourceNode);
         runtimeNode.Id = _incrementalId++;
+        // Keep a link to the source asset so dialogues (which reference the asset) can be matched.
+        runtimeNode.SourceTemplate = sourceNode;
 
         data.Evidences.Add(runtimeNode);
         EvidenceSystem.Instance.RegisterEvidence(runtimeNode);

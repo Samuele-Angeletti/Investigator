@@ -1,29 +1,15 @@
 ﻿using StarterAssets;
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider))]
 public class Door : MonoBehaviour, IInteractable
 {
-    private Transform _activeWaypoint = null;
-    private bool _canInteract = false;
-
-    public void EnterInDoor(Transform targetWaypoint)
-    {
-        _activeWaypoint = targetWaypoint;
-        _canInteract = true;
-    }
-
- 
-    public void ExitFromDoor()
-    {
-        _activeWaypoint = null;
-        _canInteract = false;
-    }
-
+    public Transform Enter = null;
+    public UnityEvent onInteract;
     public void Interact()
     {
-        if (!_canInteract || _activeWaypoint == null) return;
-
+        if (Enter == null) return;
+        onInteract?.Invoke();
         FirstPersonController fpController = FindFirstObjectByType<FirstPersonController>();
         if (fpController != null)
         {
@@ -37,11 +23,9 @@ public class Door : MonoBehaviour, IInteractable
         if (cc != null)
         {
             cc.enabled = false;
-            player.transform.position = _activeWaypoint.position;
-            player.transform.rotation = _activeWaypoint.rotation;
+            player.transform.position = Enter.position;
+            player.transform.rotation = Enter.rotation;
             cc.enabled = true;
-
-          
         }
     }
 }

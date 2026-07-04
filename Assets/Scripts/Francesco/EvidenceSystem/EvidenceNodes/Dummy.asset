@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: A small knife
   EvidenceModel: {fileID: 0}
   EvidenceType: 0
-  TruthValue: 0
-  LinkedSuspect: {fileID: 0}
+  TruthValue: 0.1
+  LinkedSuspect: {fileID: 11400000, guid: eee19d77d04b39e40a2c55bfb568ee10, type: 2}
   EvidenceTags:
   - {fileID: 11400000, guid: ab13517d320f32fc097766edfe4a9fc9, type: 2}

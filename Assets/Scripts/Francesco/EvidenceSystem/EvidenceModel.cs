@@ -1,35 +1,81 @@
 using UnityEngine;
 
-public class EvidenceModel : MonoBehaviour
+public class EvidenceModel : MonoBehaviour, IInteractable
 {
-    [SerializeField] private EvidenceNode _evidenceNode;
+    [SerializeField] private EvidenceNode _evidenceNode; 
     public EvidenceNode EvidenceNode
     {
-        get
-        {
-            return _evidenceNode;
-        }
-        set
-        {
-            _evidenceNode = value;
-        }
+        get => _evidenceNode; 
+        set => _evidenceNode = value; 
     }
 
     [SerializeField, Range(0f, 1f)]
-    private float _visibility = 0f;
-    private bool _isCollected;
-    public bool IsCollected => _isCollected;
+    private float _visibility = 0f; 
 
+   
+    public float Visibility => _visibility;
+
+    private bool _isCollected; 
+    public bool IsCollected => _isCollected; 
+
+    [SerializeField] private Behaviour _outlineEffect;
+
+    private void OnEnable()
+    {
+        AttemptRegistration();
+    }
+    private void Start()
+    {
+        AttemptRegistration();
+    }
+
+    private void AttemptRegistration()
+    {
+       
+        if (LensManager.Instance != null)
+        {
+            LensManager.Instance.RegisterEvidence(this);
+        }
+    }
+
+    private void OnDisable()
+    {
+       
+        if (LensManager.Instance != null)
+        {
+            LensManager.Instance.UnregisterEvidence(this);
+        }
+
+       
+        Highlight(false);
+    }
+
+   
+    public void Highlight(bool state)
+    {
+        if (_outlineEffect != null)
+        {
+            _outlineEffect.enabled = state;
+        }
+    }
+
+  
     public void AddVisibility(float visibility)
     {
-        _visibility += visibility;
+        _visibility += visibility; 
         _visibility = Mathf.Clamp01(_visibility);
     }
 
     public void Initialize(EvidenceNode evidenceNode)
     {
-        _evidenceNode = evidenceNode;
+        _evidenceNode = evidenceNode; 
         _isCollected = false;
-        _visibility = 0f;
+        _visibility = 0f; 
+    }
+
+    public void Interact()
+    {
+        Journal.Instance.AddEvidence(_evidenceNode);
+        Destroy(gameObject);
     }
 }

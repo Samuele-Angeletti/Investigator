@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Evidence : MonoBehaviour, IInteractable
+public class EvidenceInteract : MonoBehaviour, IInteractable
 {
     public void Interact()
     {
