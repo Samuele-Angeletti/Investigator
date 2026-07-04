@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Chicken
   m_EditorClassIdentifier: Assembly-CSharp::EvidenceNode
   Id: 0
-  Description: A Big chicken
+  Description: A small knife
   EvidenceModel: {fileID: 0}
-  EvidenceType: 0
-  TruthValue: 0.2
-  LinkedSuspect: {fileID: 11400000, guid: be6147933ed7646d685d76e0436a44ee, type: 2}
+  EvidenceType: 4
+  TruthValue: 0
+  LinkedSuspect: {fileID: 0}
   EvidenceTags:
   - {fileID: 11400000, guid: 8173b3f54b275139f939d173f2b53411, type: 2}
   - {fileID: 11400000, guid: d447f0e67ca5ef01591c048f121d3087, type: 2}
