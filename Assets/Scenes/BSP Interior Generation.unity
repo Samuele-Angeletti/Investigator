@@ -158,6 +158,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &50340670
 Transform:
   m_ObjectHideFlags: 0
@@ -390,6 +391,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &244427744
 Transform:
   m_ObjectHideFlags: 0
@@ -444,6 +446,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &337660815
 Transform:
   m_ObjectHideFlags: 0
@@ -601,6 +604,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &762398308
 Transform:
   m_ObjectHideFlags: 0
@@ -655,6 +659,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &846780482
 Transform:
   m_ObjectHideFlags: 0
@@ -771,6 +776,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &872136484
 Transform:
   m_ObjectHideFlags: 0
@@ -781,37 +787,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -90, y: 1, z: 90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &905877062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 905877063}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &905877063
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 905877062}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -87, y: 1, z: -82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -856,6 +831,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1010880458
 Transform:
   m_ObjectHideFlags: 0
@@ -910,6 +886,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1190889480
 Transform:
   m_ObjectHideFlags: 0
@@ -1204,6 +1181,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1259422936
 Transform:
   m_ObjectHideFlags: 0
@@ -1258,6 +1236,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1310777137
 Transform:
   m_ObjectHideFlags: 0
@@ -1496,6 +1475,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1568342233
 Transform:
   m_ObjectHideFlags: 0
@@ -1550,6 +1530,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1614736325
 Transform:
   m_ObjectHideFlags: 0
@@ -1960,6 +1941,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1725197649
 Transform:
   m_ObjectHideFlags: 0
@@ -2045,6 +2027,7 @@ MonoBehaviour:
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
   pointOfInterest: {fileID: 0}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &1970920873
 Transform:
   m_ObjectHideFlags: 0
@@ -2198,10 +2181,11 @@ MonoBehaviour:
   - {x: 14, y: -14}
   - {x: -14, y: -14}
   buildBSP_Seed: 1338653562
-  generateJustOnceSeed: 0
+  generateJustOnceSeed: 1
   bspDirector: {fileID: 848227957}
   entrancePoint: {fileID: 1924163908}
-  pointOfInterest: {fileID: 905877063}
+  pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
+  spawnedPointOfInterest: {fileID: 0}
 --- !u!4 &2035649700
 Transform:
   m_ObjectHideFlags: 0
@@ -2241,4 +2225,3 @@ SceneRoots:
   - {fileID: 846780482}
   - {fileID: 762398308}
   - {fileID: 1924163908}
-  - {fileID: 905877063}
