@@ -11,7 +11,7 @@ public class CaseGenerator : MonoBehaviour
     [SerializeField]
     private List<string> locations = new();
 
-    [SerializeField, Tooltip("Add at least 3 Clues and a Max of 5")]
+    [SerializeField, Tooltip("Minimum/maximum number of clues generated per case (acceptance criteria: at least 3).")]
     private int minClueCount = 3;
     [SerializeField]
     private int maxClueCount = 5;
@@ -41,7 +41,7 @@ public class CaseGenerator : MonoBehaviour
         CurrentCase = new CaseData
         {
             Seed = seed,
-            Victim = "L'uomo Ragno"
+            Victim = "Spider-Man"
         };
 
         CurrentCase.Culprit = suspects[random.Next(suspects.Count)];
@@ -112,18 +112,38 @@ public class CaseGenerator : MonoBehaviour
 
     private void GeneratePath(CaseData data, System.Random random)
     {
-        int pathLength = random.Next(3, 6);
+        int desiredPathLength = random.Next(3, 6);
 
         data.CulpritPath.Add(data.CrimeLocation);
 
-        for (int i = 0; i < pathLength; i++)
+        var pool = data.Culprit.RelatedLocations
+            .Where(loc => !data.CulpritPath.Contains(loc))
+            .ToList();
+
+        ShuffleInPlace(pool, random);
+
+        int stepsToTake = Math.Min(desiredPathLength, pool.Count);
+
+        if (stepsToTake < desiredPathLength)
         {
-            if (data.Culprit.RelatedLocations.Count == 0) break;
+            Debug.LogWarning(
+                $"'{data.Culprit.Name}' only has {pool.Count} unique related location(s) available " +
+                $"(excluding the crime location); path length reduced from {desiredPathLength} to {stepsToTake} " +
+                "to avoid repeating a location.");
+        }
 
-            string location =
-                data.Culprit.RelatedLocations[random.Next(data.Culprit.RelatedLocations.Count)];
+        for (int i = 0; i < stepsToTake; i++)
+        {
+            data.CulpritPath.Add(pool[i]);
+        }
+    }
 
-            data.CulpritPath.Add(location);
+    private void ShuffleInPlace(List<string> list, System.Random random)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = random.Next(i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
         }
     }
 }

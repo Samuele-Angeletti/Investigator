@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5135dbd93bf6818d79382bbc2f9e5076, type: 3}
   m_Name: EvidenceNodeTest
   m_EditorClassIdentifier: Assembly-CSharp::EvidenceNode
-  Id: 0
+  Id: 20
   Description: 
   EvidenceModel: {fileID: 0}
   EvidenceType: 4
   TruthValue: 0
-  LinkedSuspect: {fileID: 0}
-  EvidenceTags: []
+  LinkedSuspect: {fileID: 11400000, guid: f622b0a9a08c0f64ebb10de13a0264e1, type: 2}
+  EvidenceTags:
+  - {fileID: 11400000, guid: b21c53165929e73eebfcb7e24a999414, type: 2}
+  - {fileID: 11400000, guid: d447f0e67ca5ef01591c048f121d3087, type: 2}
