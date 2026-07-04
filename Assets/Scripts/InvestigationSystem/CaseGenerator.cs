@@ -19,6 +19,7 @@ public class CaseGenerator : MonoBehaviour
     private int _incrementalId = 0;
 
     public CaseData CurrentCase { get; private set; }
+
     public event Action<EvidenceNode> OnEvidenceGenerated;
 
     public CaseData GenerateCase(int seed)
@@ -106,33 +107,38 @@ public class CaseGenerator : MonoBehaviour
 
     private void GeneratePath(CaseData data, System.Random random)
     {
-        int pathLength = random.Next(3, 6);
-        var relatedLocations = data.Culprit.RelatedLocations;
+        int desiredPathLength = random.Next(3, 6);
 
         data.CulpritPath.Add(data.CrimeLocation);
 
-        for (int i = 0; i < pathLength; i++)
-        {
-            if (relatedLocations.Count == 0) break;
+        var pool = data.Culprit.RelatedLocations
+            .Where(loc => !data.CulpritPath.Contains(loc))
+            .ToList();
 
-            string location = PickNextLocation(relatedLocations, data.CulpritPath[^1], random);
-            data.CulpritPath.Add(location);
+        ShuffleInPlace(pool, random);
+
+        int stepsToTake = Math.Min(desiredPathLength, pool.Count);
+
+        if (stepsToTake < desiredPathLength)
+        {
+            Debug.LogWarning(
+                $"'{data.Culprit.Name}' only has {pool.Count} unique related location(s) available " +
+                $"(excluding the crime location); path length reduced from {desiredPathLength} to {stepsToTake} " +
+                "to avoid repeating a location.");
+        }
+
+        for (int i = 0; i < stepsToTake; i++)
+        {
+            data.CulpritPath.Add(pool[i]);
         }
     }
 
-    private string PickNextLocation(List<string> candidates, string previous, System.Random random)
+    private void ShuffleInPlace(List<string> list, System.Random random)
     {
-        if (candidates.Count <= 1)
+        for (int i = list.Count - 1; i > 0; i--)
         {
-            return candidates[0];
+            int j = random.Next(i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
         }
-
-        string pick;
-        do
-        {
-            pick = candidates[random.Next(candidates.Count)];
-        } while (pick == previous);
-
-        return pick;
     }
 }
