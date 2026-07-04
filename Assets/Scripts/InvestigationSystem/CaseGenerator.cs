@@ -6,7 +6,7 @@ using System.Linq;
 public class CaseGenerator : MonoBehaviour
 {
     [SerializeField]
-    private List<Suspect> suspects = new();
+    public List<Suspect> suspects = new();
 
     [SerializeField]
     private List<string> locations = new();

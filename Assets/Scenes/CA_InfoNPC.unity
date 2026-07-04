@@ -487,7 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CADirector
   caWidth: 50
   caHeight: 50
-  caInitialWallChance: 45
+  caInitialWallChance: 35
   caSteps: 5
   caBirthLimit: 4
   caDeathLimit: 3
@@ -512,6 +512,8 @@ MonoBehaviour:
   repeatRate: 5
   showQuadGizmos: 1
   caDirector: {fileID: 1757495329}
+  NpcsContainer: {fileID: 0}
+  npcs: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
