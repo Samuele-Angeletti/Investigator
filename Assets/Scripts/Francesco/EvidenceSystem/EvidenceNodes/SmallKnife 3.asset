@@ -17,7 +17,7 @@ MonoBehaviour:
   EvidenceModel: {fileID: 0}
   EvidenceType: 0
   TruthValue: 0
-  LinkedSuspect: {fileID: 0}
+  LinkedSuspect: {fileID: 11400000, guid: f622b0a9a08c0f64ebb10de13a0264e1, type: 2}
   EvidenceTags:
   - {fileID: 11400000, guid: b21c53165929e73eebfcb7e24a999414, type: 2}
   - {fileID: 11400000, guid: 45675ecc53b7967119780d234c27d7b0, type: 2}

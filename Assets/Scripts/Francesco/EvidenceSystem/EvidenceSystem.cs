@@ -4,11 +4,12 @@ using System.Linq;
 using DesignPatterns.Generics;
 using UnityEngine;
 using Random = System.Random;
-
+[DefaultExecutionOrder(-1000)]
 public class EvidenceSystem : Singleton<EvidenceSystem>
 {
     private List<EvidenceNode> _allGeneratedEvidences = new();
     private HashSet<EvidenceNode> _collectedEvidences = new();
+    public List<EvidenceNode> Evidences => _evidences;
     [SerializeField] private List<EvidenceNode> _evidences = new();
 
     [Header("Testing")]
@@ -16,6 +17,10 @@ public class EvidenceSystem : Singleton<EvidenceSystem>
     [SerializeField] private List<EvidenceNode> _foundNodes = new();
 
     private Dictionary<HashSet<EvidenceTag>, List<EvidenceNode>> _evidencesLookup = new(HashSet<EvidenceTag>.CreateSetComparer());
+
+    // Source templates of the evidence generated for the CURRENT case.
+    // A dialogue references a template (the source asset), so membership is checked here.
+    private readonly HashSet<EvidenceNode> _activeEvidenceTemplates = new();
 
     private Random _random = new(0);
 
@@ -48,10 +53,43 @@ public class EvidenceSystem : Singleton<EvidenceSystem>
 
     public bool RegisterEvidence(EvidenceNode newEvidenceNode)
     {
+        if (newEvidenceNode == null) return false;
         if (_allGeneratedEvidences.Contains(newEvidenceNode)) return false;
 
         _allGeneratedEvidences.Add(newEvidenceNode);
+
+        // Track the template so dialogues (which reference the source asset) can be matched.
+        EvidenceNode template = newEvidenceNode.SourceTemplate != null
+            ? newEvidenceNode.SourceTemplate
+            : newEvidenceNode;
+        _activeEvidenceTemplates.Add(template);
+
         return true;
+    }
+
+    /// <summary>
+    /// Clears the evidence generated for the previous case. Must be called at the start
+    /// of case generation so that <see cref="ContainsEvidence"/> reflects only the
+    /// current case instead of accumulating across cases.
+    /// </summary>
+    public void ResetGeneratedEvidence()
+    {
+        _allGeneratedEvidences.Clear();
+        _collectedEvidences.Clear();
+        _activeEvidenceTemplates.Clear();
+    }
+
+    /// <summary>
+    /// Returns whether the given evidence is part of the current case. Matches both the
+    /// source asset (a dialogue references the template) and, defensively, a runtime node.
+    /// </summary>
+    /// <param name="evidence">The evidence asset (template) to look up.</param>
+    public bool ContainsEvidence(EvidenceNode evidence)
+    {
+        if (evidence == null) return false;
+
+        return _activeEvidenceTemplates.Contains(evidence)
+            || _allGeneratedEvidences.Contains(evidence);
     }
 
     public void CollectEvidence(EvidenceNode evidenceNode)

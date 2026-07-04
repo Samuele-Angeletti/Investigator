@@ -14,5 +14,5 @@ public class CaseData
 
     public List<string> CulpritPath = new();
 
-    public List<Evidence> Evidences = new();
+    public List<EvidenceNode> Evidences = new();
 }

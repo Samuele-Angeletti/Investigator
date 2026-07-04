@@ -1,7 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NpcHandler : MonoBehaviour
+/// <summary>
+/// Cervello dell'NPC: possiede la state machine e l'API pubblica di movimento.
+/// È anche il punto di interazione del giocatore (<see cref="IInteractable"/>):
+/// su interazione avvia un dialogo delegandone selezione e visualizzazione,
+/// senza conoscerne il contenuto né la categoria.
+/// </summary>
+public class NpcHandler : MonoBehaviour, IInteractable
 {
     [Header("References")]
     [SerializeField] private Animator _animator;
@@ -11,17 +17,14 @@ public class NpcHandler : MonoBehaviour
     [SerializeField] private float _minIdleDuration = 3f;
     [SerializeField] private float _maxIdleDuration = 3f;
 
-    [Header("Talking")]
-    [SerializeField] private float _talkingDuration = 4f;
-
     [Header("Walking")]
     [SerializeField] private float _walkSearchRadius = 5f;
     [SerializeField] private float _destinationReachedDistance = 0.3f;
 
     private GenericStateMachine<ECharactertState> _stateMachine;
+    private IDialogueProvider _dialogueProvider;
 
     public float IdleDuration => UnityEngine.Random.Range(_minIdleDuration, _maxIdleDuration);
-    public float TalkingDuration => _talkingDuration;
     public float WalkSearchRadius => _walkSearchRadius;
     public float DestinationReachedDistance => _destinationReachedDistance;
 
@@ -32,6 +35,9 @@ public class NpcHandler : MonoBehaviour
     {
         if (_agent == null)
             _agent = GetComponent<NavMeshAgent>();
+
+        // La sorgente del dialogo è opzionale: un NPC senza dialoghi non è interrogabile.
+        _dialogueProvider = GetComponent<IDialogueProvider>();
 
         _stateMachine = new GenericStateMachine<ECharactertState>();
 
@@ -50,7 +56,27 @@ public class NpcHandler : MonoBehaviour
     private void OnCollisionEnter(Collision col) => _stateMachine.OnCollisionEnter();
     private void OnCollisionExit(Collision col) => _stateMachine.OnCollisionExit();
 
-    // --- Unica API pubblica esterna ---
+    // --- Interazione ---
+
+    /// <summary>
+    /// Chiamato dal sistema di interazione del giocatore. Avvia un dialogo se
+    /// l'NPC non sta già parlando e se una sorgente di dialoghi è disponibile.
+    /// L'NPC torna in Idle automaticamente alla chiusura del dialogo.
+    /// </summary>
+    public void Interact()
+    {
+        if (CurrentState == ECharactertState.Talking)
+            return;
+
+        if (DialogueController.Instance == null || _dialogueProvider == null)
+            return;
+
+        StartTalking();
+        DialogueController.Instance.Begin(_dialogueProvider, GoToIdle);
+    }
+
+    // --- Transizioni di stato ---
+
     public void StartTalking()
     {
         StopMovement();
@@ -67,6 +93,8 @@ public class NpcHandler : MonoBehaviour
     {
         _stateMachine.SetState(ECharactertState.Walking);
     }
+
+    // --- Movimento ---
 
     public bool TryFindRandomNavMeshPoint(out Vector3 result)
     {

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5135dbd93bf6818d79382bbc2f9e5076, type: 3}
+  m_Name: DialogueProof
+  m_EditorClassIdentifier: Assembly-CSharp::EvidenceNode
+  Id: 1234567890
+  Description: Is a blond guy walking sadly the murderer!
+  EvidenceModel: {fileID: 0}
+  EvidenceType: 2
+  TruthValue: 0.2
+  LinkedSuspect: {fileID: 11400000, guid: be6147933ed7646d685d76e0436a44ee, type: 2}
+  EvidenceTags:
+  - {fileID: 11400000, guid: 45675ecc53b7967119780d234c27d7b0, type: 2}

@@ -1,3 +1,7 @@
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BSPAreaData : MonoBehaviour
@@ -9,6 +13,12 @@ public class BSPAreaData : MonoBehaviour
     [Header("Refs")]
     [SerializeField] BSPDirector bspDirector;
     [SerializeField] Transform entrancePoint;
+    [SerializeField] EvidenceNode pointOfInterest;
+    public EvidenceModel spawnedPointOfInterest;
+    [SerializeField] DecorativeObjectData[] decorativeObjects;
+    [SerializeField] Transform[] spawnedDecorativeObjects;
+
+    List<Vector2Int> decorativeObjectsPosList;
     /// <summary>
     /// chiamata quando entra nel trigger dell'area del building
     /// </summary>
@@ -17,7 +27,7 @@ public class BSPAreaData : MonoBehaviour
     {
         if (generateJustOnceSeed)
         {
-            buildBSP_Seed = Random.Range(int.MinValue, int.MaxValue);
+            buildBSP_Seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
             generateJustOnceSeed = false;
         }
 
@@ -36,9 +46,25 @@ public class BSPAreaData : MonoBehaviour
             RandomSeed = false
         });
 
-        entrancePoint.transform.position = transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.firstPoint.x, 0, bspDirector.firstPoint.y);
+        decorativeObjectsPosList = new List<Vector2Int>();
+        decorativeObjectsPosList.Add(bspDirector.firstPoint);
 
+        entrancePoint.transform.position = transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.firstPoint.x, 0, bspDirector.firstPoint.y);
         //genero il punto di interesse
+        if (spawnedPointOfInterest == null)
+        {
+            spawnedPointOfInterest = Instantiate(pointOfInterest.EvidenceModel, transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.randomPoint.x, 0, bspDirector.randomPoint.y), Quaternion.identity);
+            spawnedPointOfInterest.Initialize(pointOfInterest);
+        }
+        spawnedPointOfInterest.gameObject.SetActive(true);
+
+        //genero oggetti decorativi
+        if (spawnedDecorativeObjects == null || spawnedDecorativeObjects.Length == 0)
+            SpawnDecorativeObj();
+        foreach (Transform t in spawnedDecorativeObjects)
+        {
+            t.gameObject.SetActive(true);
+        }   
     }
     /// <summary>
     /// chiamata quando esce dall'area del triggere del building
@@ -46,6 +72,11 @@ public class BSPAreaData : MonoBehaviour
     public void HideArea()
     {
         bspDirector.HideGeneratedArea();
+        spawnedPointOfInterest.gameObject.SetActive(false);
+        foreach (Transform t in spawnedDecorativeObjects)
+        {
+            t.gameObject.SetActive(false);
+        }
     }
 
     Vector2Int GetSize()
@@ -87,4 +118,29 @@ public class BSPAreaData : MonoBehaviour
             Gizmos.DrawLine(currentPoint, nextPoint);
         }
     }
+    void SpawnDecorativeObj()
+    {
+        List<Transform> decorativeObjectsSpawned = new List<Transform>(spawnedDecorativeObjects);
+        foreach (DecorativeObjectData t in decorativeObjects)
+        {
+            for (int i = 0; i < t.quantity; i++)
+            {
+                Vector2Int randomPos = bspDirector.GetRandomPosInRoom();
+                while (decorativeObjectsPosList.Contains(randomPos))
+                {
+                    randomPos = bspDirector.GetRandomPosInRoom();
+                }
+                decorativeObjectsPosList.Add(randomPos);
+                Transform T = Instantiate(t.prefab, transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(randomPos.x, 0, randomPos.y), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
+                decorativeObjectsSpawned.Add(T);
+            }
+        }
+        spawnedDecorativeObjects = decorativeObjectsSpawned.ToArray();
+    }
+}
+[Serializable]
+public class DecorativeObjectData
+{
+    public Transform prefab;
+    public int quantity;
 }
