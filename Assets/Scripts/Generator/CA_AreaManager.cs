@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CA_AreaManager : MonoBehaviour
@@ -6,22 +7,36 @@ public class CA_AreaManager : MonoBehaviour
     [SerializeField] Vector2Int[] caPArea;
     [SerializeField] float repeatRate = 5f;
     Vector2Int size;
-
+    [Space]
     [SerializeField] bool showQuadGizmos = true;
+
+    GenerationResult generationResult;
+    HashSet<Vector2Int> infoPoint;
 
     [Header("Refs")]
     [SerializeField] CADirector caDirector;
+    [SerializeField] Transform NpcsContainer;
+    [SerializeField] NpcHandler[] npcs;
 
     private void Start()
     {
-        size = GetSize();
+        Initialize();
         StartCoroutine(StartCheckingArea());
     }
-
-    [ContextMenu("Debug_BSPArea")]
-    public void GenerateBSPArea()
+    void Initialize()
     {
+        size = GetSize();
+        PopulateNpcs();
+    }
+    [ContextMenu("Debug_BSP")]
+    public void GenerateCAArea()
+    {
+        //Vector3 newPos = transform.position + new Vector3(caPArea[caPArea.Length - 1].x, 0, caPArea[caPArea.Length - 1].y);
+        //transform.position = newPos;
 
+        size = GetSize();
+        caDirector.GenerateBSPDebug(size);
+        generationResult = caDirector.GetGenerationResult();
     }
     Vector2Int GetSize()
     {
@@ -49,11 +64,62 @@ public class CA_AreaManager : MonoBehaviour
     }
     IEnumerator StartCheckingArea()
     {
-               while (true)
+        while (true)
         {
             caDirector.GenerateBSPDebug(size);
-            //caDirector.CheckIfPlayerInArea(caPArea);
+            generationResult = caDirector.GetGenerationResult();
+
+            CheckArea();
+            CheckNPCs();
+
             yield return new WaitForSeconds(repeatRate);
+        }
+    }
+    void PopulateNpcs()
+    {
+        npcs = NpcsContainer.GetComponentsInChildren<NpcHandler>();
+    }
+    /// <summary>
+    /// controllo l'area e mi salvo i punti di interesse in un hashset
+    /// </summary>
+    void CheckArea()
+    {
+        infoPoint = new HashSet<Vector2Int>();
+        generationResult.ForEachCell((x, y, value) =>
+        {
+            Vector3 newPos = transform.position + new Vector3(caPArea[caPArea.Length - 1].x, 0, caPArea[caPArea.Length - 1].y);
+            Vector2Int newPosXZ = new Vector2Int(Mathf.RoundToInt(newPos.x), Mathf.RoundToInt(newPos.z));
+            switch (value)
+            {
+                // room
+                case 0:
+                    infoPoint.Add(newPosXZ + new Vector2Int(x, y));
+                    break;
+                // wall
+                case 1:
+                    break;
+            }
+        });
+    }
+    /// <summary>
+    /// fa un foreach di ogni NPC presente dalla lista e controllo se il punto più vicino è all'interno dell'hashset o no, 
+    /// se si allora lo faccio entrare in modalità di ricerca del punto di interesse, altrimenti lo faccio tornare alla sua routine normale
+    /// </summary>
+    void CheckNPCs()
+    {
+        foreach (NpcHandler npc in npcs)
+        {
+            Vector2Int npcPos = new Vector2Int(Mathf.RoundToInt(npc.transform.position.x), Mathf.RoundToInt(npc.transform.position.z));
+            if (infoPoint.Contains(npcPos))
+            {
+                //il npc diventa stato informato
+                npc.SetInfoState(ECharacterInfoState.Informed);
+            }
+            else
+            {
+                //il npc diventa stato ignaro
+                npc.SetInfoState(ECharacterInfoState.Unaware);
+            }
         }
     }
     private void OnDrawGizmosSelected()
@@ -71,6 +137,24 @@ public class CA_AreaManager : MonoBehaviour
             Gizmos.DrawLine(currentPoint, nextPoint);
         }
 
-        
+        if (showQuadGizmos && generationResult != null)
+        {
+            Vector3 newPos = transform.position + new Vector3(caPArea[caPArea.Length - 1].x, 0, caPArea[caPArea.Length - 1].y);
+            generationResult.ForEachCell((x, y, value) =>
+            {
+                switch (value)
+                {
+                    // room
+                    case 0:
+                        Gizmos.color = Color.green;
+                        break;
+                    // wall
+                    case 1:
+                        Gizmos.color = Color.blue;
+                        break;
+                }
+                Gizmos.DrawWireCube(new Vector3(x + 0.5f, 0, y + 0.5f) + newPos, new Vector3(1, 0, 1));
+            });
+        }
     }
 }

@@ -492,8 +492,6 @@ MonoBehaviour:
   caBirthLimit: 4
   caDeathLimit: 3
   caSolidBorder: 1
-  caSeed: 45
-  caRandomSeed: 0
 --- !u!114 &1757495330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,68 +510,8 @@ MonoBehaviour:
   - {x: 120, y: -120}
   - {x: -120, y: -120}
   repeatRate: 5
+  showQuadGizmos: 1
   caDirector: {fileID: 1757495329}
---- !u!1 &2035649698
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2035649700}
-  - component: {fileID: 2035649699}
-  m_Layer: 0
-  m_Name: BSPAreaData1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2035649699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2035649698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac81983b9a38f440a32ee446c1626c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BSPAreaData
-  BSPArea:
-  - {x: -14, y: 14}
-  - {x: 14, y: 14}
-  - {x: 14, y: -14}
-  - {x: -14, y: -14}
-  buildBSP_Seed: -315288226
-  generateJustOnceSeed: 0
-  bspDirector: {fileID: 0}
-  entrancePoint: {fileID: 0}
-  pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
-  spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects:
-  - prefab: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
-    quantity: 2
-  - prefab: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
-    quantity: 3
-  spawnedDecorativeObjects: []
---- !u!4 &2035649700
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2035649698}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -90, y: 1, z: -90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -581,5 +519,4 @@ SceneRoots:
   - {fileID: 1197120029}
   - {fileID: 1339489755}
   - {fileID: 1514160797}
-  - {fileID: 2035649700}
   - {fileID: 1757495328}

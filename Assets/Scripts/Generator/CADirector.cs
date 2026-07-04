@@ -13,10 +13,13 @@ public class CADirector : MonoBehaviour
     [SerializeField] int caDeathLimit = 3;
     [SerializeField] bool caSolidBorder = true;
 
-    [ContextMenu("Debug_BSP")]
     public void GenerateBSPDebug(Vector2Int _area)
     {
         generationResult = GenerateCellularAutomata(_area);
+    }
+    public GenerationResult GetGenerationResult()
+    {
+        return generationResult;
     }
     private GenerationResult GenerateCellularAutomata()
     {
