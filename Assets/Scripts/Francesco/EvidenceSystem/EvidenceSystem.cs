@@ -4,7 +4,7 @@ using System.Linq;
 using DesignPatterns.Generics;
 using UnityEngine;
 using Random = System.Random;
-
+[DefaultExecutionOrder(-1000)]
 public class EvidenceSystem : Singleton<EvidenceSystem>
 {
     private List<EvidenceNode> _allGeneratedEvidences = new();
