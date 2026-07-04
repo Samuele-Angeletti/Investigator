@@ -13,7 +13,7 @@ public class BSPAreaData : MonoBehaviour
     [Header("Refs")]
     [SerializeField] BSPDirector bspDirector;
     [SerializeField] Transform entrancePoint;
-    [SerializeField] EvidenceNode pointOfInterest;
+    public EvidenceNode pointOfInterest;
     public EvidenceModel spawnedPointOfInterest;
     [SerializeField] DecorativeObjectData[] decorativeObjects;
     [SerializeField] Transform[] spawnedDecorativeObjects;

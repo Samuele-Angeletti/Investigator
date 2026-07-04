@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EvidenceNode
   Id: 0
   Description: A Big chicken
-  EvidenceModel: {fileID: 0}
+  EvidenceModel: {fileID: 5209581951812054375, guid: 94fd4632c28212c4dbc880f29c68541a, type: 3}
   EvidenceType: 0
   TruthValue: 0.2
   LinkedSuspect: {fileID: 11400000, guid: be6147933ed7646d685d76e0436a44ee, type: 2}
