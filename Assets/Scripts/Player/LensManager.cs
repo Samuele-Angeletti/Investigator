@@ -4,6 +4,7 @@ using StarterAssets;
 using System.Collections;
 using Unity.Cinemachine;
 
+
 public class LensManager : MonoBehaviour
 {
    
@@ -28,8 +29,12 @@ public class LensManager : MonoBehaviour
    
     private float _revealRadiusSqr;
 
+    private float _distanceSqr;
+
     [Header("Investigation Mode Camera Settings")]
     [SerializeField] private CinemachineCamera _zoomCamera;
+
+     
 
     private const int PRIORITY_ACTIVE = 15;
     private const int PRIORITY_INACTIVE = 9;
@@ -114,46 +119,38 @@ public class LensManager : MonoBehaviour
     {
         Vector3 playerPosition = _playerController.transform.position;
 
-        Debug.Log("Pollo");
-       
         foreach (var evidence in _activeEvidenceModels)
         {
             if (evidence == null || evidence.EvidenceNode == null) continue;
-
-            
             float distanceSqr = (evidence.transform.position - playerPosition).sqrMagnitude;
+            bool isWithinRadius = distanceSqr <= _revealRadiusSqr;
 
-            
-            bool canReveal = distanceSqr <= _revealRadiusSqr;
-
-            if(canReveal)
+            if (evidence.EvidenceNode.EvidenceType == EEvidenceType.FOOTSTEPS)
             {
-                float distance= Mathf.Sqrt(distanceSqr);
-                float proximity = 1f - (distance / _revealRadius);
+               
+                if (isWithinRadius)
+                {
+                    float distance = Mathf.Sqrt(distanceSqr);
+                    float proximity = 1f - (distance / _revealRadius);
+                    float visibilityGain = proximity * 0.5f * Time.deltaTime;
 
-                float visibilityGain = proximity * 0.5f * Time.deltaTime;
+                    evidence.AddVisibility(visibilityGain);
+                }
+                else
+                {
+                    evidence.AddVisibility(-0.1f * Time.deltaTime);
+                }
 
-                evidence.AddVisibility(visibilityGain);
-            }
-
-            else
-            {
-                evidence.AddVisibility(-0.1f * Time.deltaTime);
-            }
-
-            bool canRead = evidence.Visibility >= _minVisibility;
-
-            Debug.Log($"[DEBUG] Indizio: {evidence.name} | " +
-          $"Distanza OK? {canReveal} (SqrDist: {distanceSqr} <= SqrRadius: {_revealRadiusSqr}) | " +
-          $"Visibilità OK? {canRead} (Vis: {evidence.Visibility} >= Min: {_minVisibility})");
-
-            if (canReveal && canRead)
-            {
-                evidence.Highlight(true);
+                bool canRead = evidence.Visibility >= _minVisibility;
+                evidence.Highlight(isWithinRadius && canRead);
             }
             else
             {
-                evidence.Highlight(false);
+                bool canRead = evidence.Visibility >= _minVisibility;
+                if (canRead && isWithinRadius)
+                {
+                    evidence.Highlight(true);
+                }
             }
         }
     }
