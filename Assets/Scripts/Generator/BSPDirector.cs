@@ -2,14 +2,9 @@ using UnityEngine;
 
 public class BSPDirector : MonoBehaviour
 {
-    [Header("Simple Walker Settings")]
-    [SerializeField] int gridDimension;
-    [SerializeField] int attempts;
-
     [SerializeField] MeshProceduralGenerator groundMeshGenerator;
     [SerializeField] MeshProceduralGenerator wallMeshGenerator;
     [SerializeField] MeshProceduralGenerator ceilingMeshGenerator;
-    bool[,] grid;
 
     GenerationResult generationResult;
 
@@ -78,5 +73,9 @@ public class BSPDirector : MonoBehaviour
         groundMeshGenerator.gameObject.SetActive(false);
         wallMeshGenerator.gameObject.SetActive(false);
         ceilingMeshGenerator.gameObject.SetActive(false);
+    }
+    public Vector2Int GetRandomPosInRoom()
+    {
+        return generationResult.GetRandomRoomPos();
     }
 }
