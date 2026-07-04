@@ -33,6 +33,7 @@ public class LensManager : MonoBehaviour
 
     [Header("Investigation Mode Camera Settings")]
     [SerializeField] private CinemachineCamera _zoomCamera;
+    [SerializeField] private GameObject _lensObject;
 
      
 
@@ -58,6 +59,8 @@ public class LensManager : MonoBehaviour
             Debug.LogError("LensManager: Nessun FirstPersonController trovato nella scena!");
         }
         _revealRadiusSqr = _revealRadius * _revealRadius;
+
+        _lensObject.SetActive(false);
     }
 
    
@@ -91,6 +94,11 @@ public class LensManager : MonoBehaviour
         if(_zoomCamera!=null)
         {
             _zoomCamera.Priority = _isInvestigationModeActive ? PRIORITY_ACTIVE : PRIORITY_INACTIVE;
+        }
+
+        if(_lensObject!=null)
+        {
+            _lensObject.SetActive(true);
         }
         else
         {
@@ -173,5 +181,7 @@ public class LensManager : MonoBehaviour
                 }
             }
         }
+
+        _lensObject.SetActive(false);
     }
 }
