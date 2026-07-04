@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 move;
 		public Vector2 look;
 		public bool interact;
+		public bool investigate;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -39,11 +40,10 @@ namespace StarterAssets
 			InteractInput(value.isPressed);
 		}
 
-       
-
-
-
-
+		public void OnInvestigate(InputValue value)
+		{
+            InvestigateInput(value.isPressed);
+		}
 #endif
 
 
@@ -59,6 +59,10 @@ namespace StarterAssets
         private void InteractInput(bool isPressed)
         {
 			interact= isPressed;
+        }
+        private void InvestigateInput(bool isPressed)
+        {
+            investigate = isPressed;
         }
 
 

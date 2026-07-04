@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -114,9 +115,29 @@ namespace StarterAssets
 		{
 			GroundedCheck();
 			Move();
-		}
+            HandleInvestigationInput();
+        }
 
-		private void LateUpdate()
+        private void HandleInvestigationInput()
+        {
+            if (_input != null && _input.investigate)
+            {
+                
+                _input.investigate = false;
+
+              
+                if (LensManager.Instance != null)
+                {
+                    LensManager.Instance.ToggleInvestigationMode();
+                }
+                else
+                {
+                    Debug.LogWarning("FirstPersonController: LensManager.Instance non trovato nella scena!");
+                }
+            }
+        }
+
+        private void LateUpdate()
 		{
 			CameraRotation();
 		}
