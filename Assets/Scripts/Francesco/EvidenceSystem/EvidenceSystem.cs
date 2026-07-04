@@ -60,8 +60,7 @@ public class EvidenceSystem : Singleton<EvidenceSystem>
         if (_collectedEvidences.Contains(evidenceNode)) return;
 
         _collectedEvidences.Add(evidenceNode);
-        //TODO: add to journal
-        // Journal.Add(evidenceNode);
+        Journal.Instance.AddEvidence(evidenceNode);
     }
 
     [ContextMenu("TestGetPossibleEvidences")]
