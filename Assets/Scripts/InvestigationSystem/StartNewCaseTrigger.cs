@@ -9,5 +9,5 @@ public class StartNewCaseTrigger : MonoBehaviour
         CaseManager.Instance.StartNewCase(seed);
     }
 
-    
+  
 }

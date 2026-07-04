@@ -1150,6 +1150,8 @@ GameObject:
   - component: {fileID: 2030393402}
   - component: {fileID: 2030393401}
   - component: {fileID: 2030393400}
+  - component: {fileID: 2030393403}
+  - component: {fileID: 2030393404}
   m_Layer: 0
   m_Name: Blank
   m_TagString: Untagged
@@ -1171,8 +1173,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CaseGenerator
   suspects:
   - {fileID: 11400000, guid: be6147933ed7646d685d76e0436a44ee, type: 2}
+  - {fileID: 11400000, guid: ca8d2a5267c4ae24da76c187c9300ae0, type: 2}
+  - {fileID: 11400000, guid: f622b0a9a08c0f64ebb10de13a0264e1, type: 2}
   locations:
-  - 
+  - Lover's Bar
+  - Main Street
+  - Bay
+  - City's Edge
+  - Skyscraper 1
+  - Near Alberto's house
+  - Skyscraper 2
   minClueCount: 3
   maxClueCount: 5
 --- !u!114 &2030393401
@@ -1203,6 +1213,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2030393403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030393399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152a8e2780f5a48aaab710bb5ec3b7cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StartNewCaseTrigger
+--- !u!114 &2030393404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030393399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a51fbf17987a231a90a383e5af63372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EvidenceSystem
+  _evidences:
+  - {fileID: 11400000, guid: 6b06c69a5001c44bf8a56cf3d2ec0341, type: 2}
+  - {fileID: 11400000, guid: ce785b9ca64a44fa8bcab62b2bc3e40c, type: 2}
+  - {fileID: 11400000, guid: 1f411a06e4c71a684bb1dc921fda958d, type: 2}
+  - {fileID: 11400000, guid: e850d945b67c9d376996af3c93d9b056, type: 2}
+  _testNode: {fileID: 11400000, guid: 7f70961e17d77370fbb3e6c3e7b138fd, type: 2}
+  _foundNodes:
+  - {fileID: 11400000, guid: 6efeca6ffa78b4de5a2da69ba65ef4cd, type: 2}
 --- !u!1 &2055685947
 GameObject:
   m_ObjectHideFlags: 0
