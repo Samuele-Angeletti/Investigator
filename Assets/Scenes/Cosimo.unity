@@ -1157,7 +1157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428feb422985ffe4fbc6b8f16824606a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _revealRadius: 10
+  _revealRadius: 5
   _minVisibility: 0.2
   _activeEvidenceModels: []
   _zoomCamera: {fileID: 1369821247}
