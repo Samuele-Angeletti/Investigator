@@ -9,6 +9,7 @@ public class BSPAreaData : MonoBehaviour
     [Header("Refs")]
     [SerializeField] BSPDirector bspDirector;
     [SerializeField] Transform entrancePoint;
+    [SerializeField] Transform pointOfInterest;
     /// <summary>
     /// chiamata quando entra nel trigger dell'area del building
     /// </summary>
@@ -37,7 +38,7 @@ public class BSPAreaData : MonoBehaviour
         });
 
         entrancePoint.transform.position = transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.firstPoint.x, 0, bspDirector.firstPoint.y);
-
+        pointOfInterest.transform.position = transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.randomPoint.x, 0, bspDirector.randomPoint.y);
         //genero il punto di interesse
     }
     /// <summary>
