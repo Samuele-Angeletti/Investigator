@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NpcHandler : MonoBehaviour
+public class NpcHandler : MonoBehaviour, IInteractable
 {
     [Header("References")]
     [SerializeField] private Animator _animator;
@@ -115,11 +115,17 @@ public class NpcHandler : MonoBehaviour
         return _agent.remainingDistance <= _destinationReachedDistance;
     }
 
+    public void Interact()
+    {
+        Debug.Log("ciao");
+    }
+
 #if UNITY_EDITOR
     private void OnValidate()
     {
         if (_maxIdleDuration < _minIdleDuration)
             _maxIdleDuration = _minIdleDuration;
     }
+
 #endif
 }
