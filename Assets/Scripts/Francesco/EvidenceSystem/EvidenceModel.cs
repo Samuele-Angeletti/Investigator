@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EvidenceModel : MonoBehaviour//, IInteractable
+public class EvidenceModel : MonoBehaviour, IInteractable
 {
     [SerializeField] private EvidenceNode _evidenceNode; 
     public EvidenceNode EvidenceNode
