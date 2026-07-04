@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 710059193311707111}
   - component: {fileID: 1546928046804036160}
   - component: {fileID: 2954412435703596458}
+  - component: {fileID: 2657197382097921848}
   m_Layer: 3
   m_Name: NPC
   m_TagString: Untagged
@@ -48,11 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NpcHandler
   _animator: {fileID: 8045538965909629724}
-  _agent: {fileID: 0}
+  _agent: {fileID: 1546928046804036160}
   _minIdleDuration: 2
   _maxIdleDuration: 7
-  _talkingDuration: 4
-  _walkSearchRadius: 10
+  _walkSearchRadius: 50
   _destinationReachedDistance: 0.3
 --- !u!195 &1546928046804036160
 NavMeshAgent:
@@ -64,11 +64,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 1200
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -97,6 +97,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3.42, z: 1}
   m_Center: {x: 0, y: 1.75, z: 0}
+--- !u!114 &2657197382097921848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2617072696083303515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c36e138f9850914baa26f1e7f2265b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NpcDialogueSource
+  _pool:
+  - {fileID: 11400000, guid: 91e5c725044a5c145af8f0dc92e2da1d, type: 2}
+  - {fileID: 11400000, guid: 01cd6220233776a4c9f7e9596534f022, type: 2}
+  - {fileID: 11400000, guid: 962ea513f110417438a951490a79c4fe, type: 2}
 --- !u!1001 &4525531199302260365
 PrefabInstance:
   m_ObjectHideFlags: 0

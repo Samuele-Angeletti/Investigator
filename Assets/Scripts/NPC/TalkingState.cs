@@ -1,11 +1,14 @@
 using UnityEngine;
 
+/// <summary>
+/// Stato "in conversazione". La durata NON è più a tempo: lo stato resta attivo
+/// finché il dialogo è aperto. L'uscita è pilotata dall'esterno tramite
+/// <see cref="NpcHandler.GoToIdle"/>, invocata alla chiusura del dialogo.
+/// </summary>
 public class TalkingState : State
 {
     private readonly Animator _animator;
     private readonly NpcHandler _owner;
-
-    private float _timer;
 
     public TalkingState(NpcHandler owner, Animator animator)
     {
@@ -15,22 +18,14 @@ public class TalkingState : State
 
     public override void OnStart()
     {
-        _timer = 0f;
         _owner.StopMovement();
         _animator.SetTrigger("Talking");
     }
 
     public override void OnEnd() { }
 
-    public override void OnUpdate()
-    {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _owner.TalkingDuration)
-        {
-            _owner.GoToIdle();
-        }
-    }
+    // Nessuna uscita a tempo: si esce alla chiusura del dialogo (vedi NpcHandler).
+    public override void OnUpdate() { }
 
     public override void OnFixedUpdate() { }
     public override void OnTriggerEnter() { }
