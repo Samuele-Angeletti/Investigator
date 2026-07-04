@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-[Serializable]
-public class Suspect
+[CreateAssetMenu(menuName = "EvidenceSystem/" + nameof(Suspect))]
+public class Suspect : ScriptableObject
 {
     public string Name;
 

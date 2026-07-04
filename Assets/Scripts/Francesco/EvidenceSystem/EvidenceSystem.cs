@@ -9,6 +9,7 @@ public class EvidenceSystem : Singleton<EvidenceSystem>
 {
     private List<EvidenceNode> _allGeneratedEvidences = new();
     private HashSet<EvidenceNode> _collectedEvidences = new();
+    public List<EvidenceNode> Evidences => _evidences;
     [SerializeField] private List<EvidenceNode> _evidences = new();
 
     [Header("Testing")]
