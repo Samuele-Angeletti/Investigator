@@ -18,9 +18,15 @@ public class DialogueController : MonoBehaviour, IDialogueService
     [SerializeField] private DialogueUIPresenter _presenterBehaviour;
     [SerializeField] private StarterAssetsInputs _inputs;
 
+    [Header("Timeout")]
+    [Tooltip("Secondi massimi di apertura del dialogo prima della chiusura automatica. " +
+             "Un valore <= 0 disabilita il timeout.")]
+    [SerializeField] private float _maxDurationSeconds = 7f;
+
     private IDialoguePresenter _presenter;
     private Action _onComplete;
     private int _openFrame = -1;
+    private float _openTime;
 
     /// <inheritdoc />
     public bool IsOpen { get; private set; }
@@ -56,6 +62,13 @@ public class DialogueController : MonoBehaviour, IDialogueService
         if (Time.frameCount <= _openFrame)
             return;
 
+        // Timeout: chiusura automatica se il giocatore non interviene entro il limite.
+        if (_maxDurationSeconds > 0f && Time.time - _openTime >= _maxDurationSeconds)
+        {
+            Close();
+            return;
+        }
+
         if (_inputs != null && _inputs.interact)
         {
             _inputs.interact = false;
@@ -77,6 +90,7 @@ public class DialogueController : MonoBehaviour, IDialogueService
 
         _onComplete = onComplete;
         _openFrame = Time.frameCount;
+        _openTime = Time.time;
         IsOpen = true;
 
         _presenter?.Show(dialogue);
