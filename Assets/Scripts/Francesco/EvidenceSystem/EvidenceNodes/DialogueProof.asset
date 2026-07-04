@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5135dbd93bf6818d79382bbc2f9e5076, type: 3}
+  m_Name: DialogueProof
+  m_EditorClassIdentifier: Assembly-CSharp::EvidenceNode
+  Id: 0
+  Description: A Big chicken
+  EvidenceModel: {fileID: 0}
+  EvidenceType: 0
+  TruthValue: 0.2
+  LinkedSuspect: {fileID: 5180477756533510967, guid: 31b7a61bdf71b4e7d982d3aabe9ca288, type: 3}
+  EvidenceTags:
+  - {fileID: 11400000, guid: 8173b3f54b275139f939d173f2b53411, type: 2}
+  - {fileID: 11400000, guid: d447f0e67ca5ef01591c048f121d3087, type: 2}
+  - {fileID: 11400000, guid: c8d385b71f6477245b04968c47295fd6, type: 2}

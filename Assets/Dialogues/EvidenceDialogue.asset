@@ -15,3 +15,4 @@ MonoBehaviour:
   _kind: 1
   _speakerName: Bob
   _body: Lo sappiamo tutti, bisogna andare alla baia per trovare il responsabile
+  _linkedEvidence: {fileID: 11400000, guid: 6b06c69a5001c44bf8a56cf3d2ec0341, type: 2}
