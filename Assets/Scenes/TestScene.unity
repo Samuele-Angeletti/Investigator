@@ -484,7 +484,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 832449339}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &50340670
 Transform:
@@ -1739,7 +1749,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 1316255437}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &244427744
 Transform:
@@ -2865,7 +2885,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 912693758}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &337660815
 Transform:
@@ -5348,6 +5378,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 542149137}
   m_CullTransparentMesh: 1
+--- !u!1 &556366599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 556366603}
+  - component: {fileID: 556366602}
+  - component: {fileID: 556366601}
+  - component: {fileID: 556366600}
+  m_Layer: 0
+  m_Name: CaseGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &556366600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556366599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 152a8e2780f5a48aaab710bb5ec3b7cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StartNewCaseTrigger
+--- !u!114 &556366601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556366599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6fb9a219a8d41ab8fdf542109cc49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CaseManager
+  caseGenerator: {fileID: 556366602}
+--- !u!114 &556366602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556366599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3c26340399f45fe993d153940ddfb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CaseGenerator
+  suspects: []
+  locations: []
+  minClueCount: 3
+  maxClueCount: 5
+--- !u!4 &556366603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556366599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &568909691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7071,7 +7176,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 2025883052}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &762398308
 Transform:
@@ -7937,7 +8052,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 1580947331}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &846780482
 Transform:
@@ -8258,7 +8383,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 1033191828}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &872136484
 Transform:
@@ -9804,7 +9939,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 70607817}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1010880458
 Transform:
@@ -11556,7 +11701,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 1171356027}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1190889480
 Transform:
@@ -12230,7 +12385,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 1458189724}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1259422936
 Transform:
@@ -12831,7 +12996,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 568909692}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1310777137
 Transform:
@@ -15425,7 +15600,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 1413605280}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1568342233
 Transform:
@@ -15650,7 +15835,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 519504705}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1614736325
 Transform:
@@ -16807,7 +17002,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 1288114077}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1725197649
 Transform:
@@ -18750,7 +18955,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 845500277}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &1970920873
 Transform:
@@ -19524,7 +19739,17 @@ MonoBehaviour:
   entrancePoint: {fileID: 431406057}
   pointOfInterest: {fileID: 3504764219931613556, guid: c66870f1bf03a7a4087eb0ebe8b46e28, type: 3}
   spawnedPointOfInterest: {fileID: 0}
-  decorativeObjects: []
+  decorativeObjects:
+  - prefab: {fileID: 1030972114, guid: abc00000000014074132175009398553, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972133, guid: abc00000000012668423437282172797, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030972152, guid: abc00000000009026292332411352372, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975297, guid: abc00000000008965007600174189720, type: 3}
+    quantity: 5
+  - prefab: {fileID: 1030975316, guid: abc00000000015527839668865543402, type: 3}
+    quantity: 5
   spawnedDecorativeObjects: []
 --- !u!4 &2035649700
 Transform:
@@ -21125,3 +21350,4 @@ SceneRoots:
   - {fileID: 936409682}
   - {fileID: 2044855444}
   - {fileID: 1261033935}
+  - {fileID: 556366603}

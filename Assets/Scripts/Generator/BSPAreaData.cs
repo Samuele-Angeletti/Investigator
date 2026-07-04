@@ -128,7 +128,7 @@ public class BSPAreaData : MonoBehaviour
                     randomPos = bspDirector.GetRandomPosInRoom();
                 }
                 decorativeObjectsPosList.Add(randomPos);
-                Transform T = Instantiate(t.prefab, transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(randomPos.x, 0, randomPos.y), Quaternion.identity);
+                Transform T = Instantiate(t.prefab, transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(randomPos.x, 0, randomPos.y), Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0));
                 decorativeObjectsSpawned.Add(T);
             }
         }
