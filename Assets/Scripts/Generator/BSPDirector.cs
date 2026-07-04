@@ -25,6 +25,7 @@ public class BSPDirector : MonoBehaviour
 
     [HideInInspector]
     public Vector2Int firstPoint;
+    public Vector2Int randomPoint;
 
     [ContextMenu("Debug_BSP")]
     public void GenerateBSPDebug()
@@ -69,7 +70,8 @@ public class BSPDirector : MonoBehaviour
         ceilingMeshGenerator.transform.position = transform.position + Vector3.up * bspRoomHeight;
         ceilingMeshGenerator.Generate(generationResult, true);
 
-       firstPoint = generationResult.GetFirstCornerBottomLeft();
+        firstPoint = generationResult.GetFirstCornerBottomLeft();
+        randomPoint = generationResult.GetRandomRoomPos();
     }
     public void HideGeneratedArea()
     {

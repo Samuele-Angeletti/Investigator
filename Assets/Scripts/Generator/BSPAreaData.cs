@@ -9,6 +9,8 @@ public class BSPAreaData : MonoBehaviour
     [Header("Refs")]
     [SerializeField] BSPDirector bspDirector;
     [SerializeField] Transform entrancePoint;
+    [SerializeField] Transform pointOfInterest;
+    [SerializeField] Transform spawnedPointOfInterest;
     /// <summary>
     /// chiamata quando entra nel trigger dell'area del building
     /// </summary>
@@ -37,6 +39,9 @@ public class BSPAreaData : MonoBehaviour
         });
 
         entrancePoint.transform.position = transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.firstPoint.x, 0, bspDirector.firstPoint.y);
+        if(spawnedPointOfInterest == null)
+            spawnedPointOfInterest = Instantiate(pointOfInterest, transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.randomPoint.x, 0, bspDirector.randomPoint.y), Quaternion.identity);
+        spawnedPointOfInterest.gameObject.SetActive(true);
 
         //genero il punto di interesse
     }
@@ -46,6 +51,7 @@ public class BSPAreaData : MonoBehaviour
     public void HideArea()
     {
         bspDirector.HideGeneratedArea();
+        spawnedPointOfInterest.gameObject.SetActive(false);
     }
 
     Vector2Int GetSize()
