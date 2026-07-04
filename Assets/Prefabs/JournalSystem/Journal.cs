@@ -79,11 +79,11 @@ public class Journal : Singleton<Journal>
             // add evidence to suspect
             if (evidenceNode.LinkedSuspect != null)
             {
-                if (!_suspectsEvidences.ContainsKey(evidenceNode.LinkedSuspect))
-                {
-                    _suspectsEvidences[evidenceNode.LinkedSuspect] = new();
-                }
-                _suspectsEvidences[evidenceNode.LinkedSuspect].Add(evidenceRow);
+                //if (!_suspectsEvidences.ContainsKey(evidenceNode.LinkedSuspect))
+                //{
+                //    _suspectsEvidences[evidenceNode.LinkedSuspect] = new();
+                //}
+                //_suspectsEvidences[evidenceNode.LinkedSuspect].Add(evidenceRow);
             }
         }
 
