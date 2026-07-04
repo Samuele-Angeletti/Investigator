@@ -119,30 +119,31 @@ public class LensManager : MonoBehaviour
     {
         Vector3 playerPosition = _playerController.transform.position;
 
-        foreach (var evidence in _activeEvidenceModels)
+        for (int i = 0; i < _activeEvidenceModels.Count; i++)
         {
+            var evidence = _activeEvidenceModels[i];
             if (evidence == null || evidence.EvidenceNode == null) continue;
+
             float distanceSqr = (evidence.transform.position - playerPosition).sqrMagnitude;
             bool isWithinRadius = distanceSqr <= _revealRadiusSqr;
 
             if (evidence.EvidenceNode.EvidenceType == EEvidenceType.FOOTSTEPS)
             {
-               
                 if (isWithinRadius)
                 {
                     float distance = Mathf.Sqrt(distanceSqr);
                     float proximity = 1f - (distance / _revealRadius);
                     float visibilityGain = proximity * 0.5f * Time.deltaTime;
-
+                    
                     evidence.AddVisibility(visibilityGain);
                 }
                 else
                 {
-                    evidence.AddVisibility(-0.1f * Time.deltaTime);
+                    evidence.AddVisibility(-0.2f * Time.deltaTime);
                 }
 
-                bool canRead = evidence.Visibility >= _minVisibility;
-                evidence.Highlight(isWithinRadius && canRead);
+                
+                evidence.UpdateEvidenceAlpha(evidence.Visibility);
             }
             else
             {
@@ -155,6 +156,9 @@ public class LensManager : MonoBehaviour
         }
     }
 
+
+    
+
     private void DisableAllHighlights()
     {
         foreach (var evidence in _activeEvidenceModels)
@@ -162,6 +166,11 @@ public class LensManager : MonoBehaviour
             if (evidence != null)
             {
                 evidence.Highlight(false);
+
+                if(evidence.EvidenceNode != null && evidence.EvidenceNode.EvidenceType==EEvidenceType.FOOTSTEPS)
+                {
+                    evidence.UpdateEvidenceAlpha(0f);
+                }
             }
         }
     }
