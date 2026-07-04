@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   _kind: 2
   _speakerName: Bob
-  _body: "\xE8 andato a ovest io l'ho visto! Portava un cappelo di paglia e non sembrava
-    volesse pentirsi dei suoi atti!"
+  _body: The murderer went to ovest close to the bay, i know it for sure, i'm not
+    drunk at all, I swear, i love you brother... humps... sorry too much vodka
+  _linkedEvidence: {fileID: 0}
