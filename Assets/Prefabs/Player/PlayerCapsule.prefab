@@ -158,6 +158,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   interact: 0
+  investigate: 0
   analogMovement: 0
   cursorLocked: 0
   cursorInputForLook: 1
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490fd4cdc6d7f3749a2dcd0d4f0c314b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
-  _interactionDistance: 1
+  _interactionDistance: 5
   _interactableLayer:
     serializedVersion: 2
     m_Bits: 8
