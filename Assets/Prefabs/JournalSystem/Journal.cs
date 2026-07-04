@@ -13,15 +13,16 @@ public class Journal : Singleton<Journal>
     [SerializeField] private EvidenceDetailsUI _evidenceDetails;
     private List<EvidenceNode> _collectedEvidences;
     //TODO: change GameObject with actual suspect class
-    private Dictionary<GameObject, List<EvidenceRow>> _suspectsEvidences;
+    private Dictionary<Suspect, List<EvidenceRow>> _suspectsEvidences;
     private Dictionary<EvidenceRow, EvidenceNode> _evidenceRowsNodes;
-    private Dictionary<SuspectRow, GameObject> _suspectRowSuspects;
+    private Dictionary<SuspectRow, Suspect> _suspectRowSuspects;
 
     private SuspectRow _currentSuspectRow;
 
     public override void Awake()
     {
         _collectedEvidences = new();
+        RefreshUI();
     }
 
     public void AddEvidence(EvidenceNode newEvidence)
@@ -90,7 +91,7 @@ public class Journal : Singleton<Journal>
         {
             SuspectRow suspectRow = Instantiate(_suspectRowPrefab, _parentSuspects);
             //TODO: add the sprite from the actual suspect clas
-            suspectRow.SetUp(null, item.Key.name);
+            suspectRow.SetUp(null, item.Key.Name);
             _suspectRowSuspects[suspectRow] = item.Key;
             suspectRow.OnClicked += DisplayEvidences;
         }
