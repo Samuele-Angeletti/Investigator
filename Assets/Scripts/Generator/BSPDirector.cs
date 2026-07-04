@@ -79,4 +79,8 @@ public class BSPDirector : MonoBehaviour
         wallMeshGenerator.gameObject.SetActive(false);
         ceilingMeshGenerator.gameObject.SetActive(false);
     }
+    public Vector2Int GetRandomPosInRoom()
+    {
+        return generationResult.GetRandomRoomPos();
+    }
 }
