@@ -7,13 +7,11 @@
     public bool RandomSeed = false;
     public int WalkerCount = 1;
     public (int dx, int dy)[] CustomDirections = null;
-
-    // Global coordinates mapped inside Biases array (POIs)
     public (int x, int y)[] Biases;
-
-    // Global coordinates that walkers are strictly forbidden from entering
     public (int x, int y)[] Exclusions;
 
-    // Amplification intensity scalar factor for choosing favored POI paths
-    public float PoiBiasIntensity = 3.0f;
+    public float PoiBiasIntensity = 1000f;
+    public float ExploreBias = 0.1f;
+    public float RevisitPenalty = 0.001f;
+    public float Inertia = 3.0f;
 }
