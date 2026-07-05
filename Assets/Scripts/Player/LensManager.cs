@@ -11,10 +11,10 @@ public class LensManager : MonoBehaviour
     public static LensManager Instance { get; private set; }
 
     [Header("Investigation Settings")]
-    [Tooltip("Raggio massimo entro cui il giocatore può rilevare gli indizi (in metri).")]
+    [Tooltip("Raggio massimo entro cui il giocatore puï¿½ rilevare gli indizi (in metri).")]
     [SerializeField] private float _revealRadius = 10f;
 
-    [Tooltip("Soglia di visibilità minima richiesta dall'indizio per essere evidenziato.")]
+    [Tooltip("Soglia di visibilitï¿½ minima richiesta dall'indizio per essere evidenziato.")]
     [SerializeField, Range(0f, 1f)] private float _minVisibility = 0.2f;
 
     private bool _isInvestigationModeActive = false;
@@ -141,7 +141,7 @@ public class LensManager : MonoBehaviour
 
                 if (lr != null && lr.positionCount > 0)
                 {
-                    // Ridimensioniamo l'array cache solo se il LineRenderer corrente ha più punti
+                    // Ridimensioniamo l'array cache solo se il LineRenderer corrente ha piï¿½ punti
                     if (_positionCache.Length < lr.positionCount)
                     {
                         _positionCache = new Vector3[lr.positionCount];
@@ -172,7 +172,7 @@ public class LensManager : MonoBehaviour
 
                     if (footprintFound)
                     {
-                        // Calcolo del guadagno di visibilità in base al punto più vicino trovato
+                        // Calcolo del guadagno di visibilitï¿½ in base al punto piï¿½ vicino trovato
                         float distance = Mathf.Sqrt(closestDistanceSqr);
                         float proximity = 1f - (distance / _revealRadius);
                         float visibilityGain = proximity * 0.5f * Time.deltaTime;
