@@ -31,6 +31,8 @@ public class LensManager : MonoBehaviour
 
     private float _distanceSqr;
 
+    private Vector3[] _positionCache = new Vector3[0];
+
     [Header("Investigation Mode Camera Settings")]
     [SerializeField] private CinemachineCamera _zoomCamera;
     [SerializeField] private GameObject _lensObject;
@@ -132,31 +134,69 @@ public class LensManager : MonoBehaviour
             var evidence = _activeEvidenceModels[i];
             if (evidence == null || evidence.EvidenceNode == null) continue;
 
-            float distanceSqr = (evidence.transform.position - playerPosition).sqrMagnitude;
-            bool isWithinRadius = distanceSqr <= _revealRadiusSqr;
-
             if (evidence.EvidenceNode.EvidenceType == EEvidenceType.FOOTSTEPS)
             {
-                if (isWithinRadius)
-                {
-                    float distance = Mathf.Sqrt(distanceSqr);
-                    float proximity = 1f - (distance / _revealRadius);
-                    float visibilityGain = proximity * 0.5f * Time.deltaTime;
-                    
-                    evidence.AddVisibility(visibilityGain);
-                }
-                else
-                {
-                    evidence.AddVisibility(-0.2f * Time.deltaTime);
-                }
+                // "Prendiamo" il componente LineRenderer dall'evidence
+                LineRenderer lr = evidence.EvidenceRenderer;
 
-                
-                evidence.UpdateEvidenceAlpha(evidence.Visibility);
+                if (lr != null && lr.positionCount > 0)
+                {
+                    // Ridimensioniamo l'array cache solo se il LineRenderer corrente ha più punti
+                    if (_positionCache.Length < lr.positionCount)
+                    {
+                        _positionCache = new Vector3[lr.positionCount];
+                    }
+
+                    // Estraiamo le posizioni senza generare garbage garbage collector
+                    lr.GetPositions(_positionCache);
+
+                    bool footprintFound = false;
+                    float closestDistanceSqr = float.MaxValue;
+
+                    // Cicliamo tutte le posizioni del tracciato
+                    for (int j = 0; j < lr.positionCount; j++)
+                    {
+                        Vector3 worldPos = lr.useWorldSpace ? _positionCache[j] : evidence.transform.TransformPoint(_positionCache[j]);
+                        float distSqr = (worldPos - playerPosition).sqrMagnitude;
+
+                        // Controllo della distanza (al quadrato, per ottimizzare le performance)
+                        if (distSqr <= _revealRadiusSqr)
+                        {
+                            footprintFound = true;
+                            closestDistanceSqr = distSqr;
+
+                            // Alla prima che trova, interrompe il controllo (Break)
+                            break;
+                        }
+                    }
+
+                    if (footprintFound)
+                    {
+                        // Calcolo del guadagno di visibilità in base al punto più vicino trovato
+                        float distance = Mathf.Sqrt(closestDistanceSqr);
+                        float proximity = 1f - (distance / _revealRadius);
+                        float visibilityGain = proximity * 0.5f * Time.deltaTime;
+
+                        // Chiama AddVisibility
+                        evidence.AddVisibility(visibilityGain);
+                    }
+                    else
+                    {
+                        // Decadimento se siamo fuori raggio da tutti i punti
+                        evidence.AddVisibility(-0.2f * Time.deltaTime);
+                    }
+
+                    // Chiama UpdateEvidenceAlpha
+                    evidence.UpdateEvidenceAlpha(evidence.Visibility);
+                }
             }
             else
             {
-                bool canRead = evidence.Visibility >= _minVisibility;
-                if (canRead && isWithinRadius)
+                // Controllo standard per gli altri tipi di indizi
+                float distanceSqr = (evidence.transform.position - playerPosition).sqrMagnitude;
+                bool isWithinRadius = distanceSqr <= _revealRadiusSqr;
+
+                if (evidence.Visibility >= _minVisibility && isWithinRadius)
                 {
                     evidence.Highlight(true);
                 }
