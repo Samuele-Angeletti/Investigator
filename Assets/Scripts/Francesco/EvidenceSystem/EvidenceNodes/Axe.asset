@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EvidenceNode
   Id: 0
   Description: Timbeeeeeerrrrr!!!!!
-  EvidenceModel: {fileID: 0}
+  EvidenceModel: {fileID: 3086957439859107305, guid: 50adc98e6f2d6864baf48f9da1b84b2b, type: 3}
   EvidenceType: 0
   TruthValue: 0
   LinkedSuspect: {fileID: 0}
