@@ -4,6 +4,7 @@ using StarterAssets;
 using System.Collections;
 using Unity.Cinemachine;
 
+
 public class LensManager : MonoBehaviour
 {
    
@@ -28,8 +29,13 @@ public class LensManager : MonoBehaviour
    
     private float _revealRadiusSqr;
 
+    private float _distanceSqr;
+
     [Header("Investigation Mode Camera Settings")]
     [SerializeField] private CinemachineCamera _zoomCamera;
+    [SerializeField] private GameObject _lensObject;
+
+     
 
     private const int PRIORITY_ACTIVE = 15;
     private const int PRIORITY_INACTIVE = 9;
@@ -53,6 +59,8 @@ public class LensManager : MonoBehaviour
             Debug.LogError("LensManager: Nessun FirstPersonController trovato nella scena!");
         }
         _revealRadiusSqr = _revealRadius * _revealRadius;
+
+        _lensObject.SetActive(false);
     }
 
    
@@ -87,6 +95,11 @@ public class LensManager : MonoBehaviour
         {
             _zoomCamera.Priority = _isInvestigationModeActive ? PRIORITY_ACTIVE : PRIORITY_INACTIVE;
         }
+
+        if(_lensObject!=null)
+        {
+            _lensObject.SetActive(true);
+        }
         else
         {
             Debug.LogWarning("LensManager: Riferimento a _zoomCamera mancante nell'Inspector!");
@@ -114,49 +127,45 @@ public class LensManager : MonoBehaviour
     {
         Vector3 playerPosition = _playerController.transform.position;
 
-        Debug.Log("Pollo");
-       
-        foreach (var evidence in _activeEvidenceModels)
+        for (int i = 0; i < _activeEvidenceModels.Count; i++)
         {
+            var evidence = _activeEvidenceModels[i];
             if (evidence == null || evidence.EvidenceNode == null) continue;
 
-            
             float distanceSqr = (evidence.transform.position - playerPosition).sqrMagnitude;
+            bool isWithinRadius = distanceSqr <= _revealRadiusSqr;
 
-            
-            bool canReveal = distanceSqr <= _revealRadiusSqr;
-
-            if(canReveal)
+            if (evidence.EvidenceNode.EvidenceType == EEvidenceType.FOOTSTEPS)
             {
-                float distance= Mathf.Sqrt(distanceSqr);
-                float proximity = 1f - (distance / _revealRadius);
+                if (isWithinRadius)
+                {
+                    float distance = Mathf.Sqrt(distanceSqr);
+                    float proximity = 1f - (distance / _revealRadius);
+                    float visibilityGain = proximity * 0.5f * Time.deltaTime;
+                    
+                    evidence.AddVisibility(visibilityGain);
+                }
+                else
+                {
+                    evidence.AddVisibility(-0.2f * Time.deltaTime);
+                }
 
-                float visibilityGain = proximity * 0.5f * Time.deltaTime;
-
-                evidence.AddVisibility(visibilityGain);
-            }
-
-            else
-            {
-                evidence.AddVisibility(-0.1f * Time.deltaTime);
-            }
-
-            bool canRead = evidence.Visibility >= _minVisibility;
-
-            Debug.Log($"[DEBUG] Indizio: {evidence.name} | " +
-          $"Distanza OK? {canReveal} (SqrDist: {distanceSqr} <= SqrRadius: {_revealRadiusSqr}) | " +
-          $"Visibilità OK? {canRead} (Vis: {evidence.Visibility} >= Min: {_minVisibility})");
-
-            if (canReveal && canRead)
-            {
-                evidence.Highlight(true);
+                
+                evidence.UpdateEvidenceAlpha(evidence.Visibility);
             }
             else
             {
-                evidence.Highlight(false);
+                bool canRead = evidence.Visibility >= _minVisibility;
+                if (canRead && isWithinRadius)
+                {
+                    evidence.Highlight(true);
+                }
             }
         }
     }
+
+
+    
 
     private void DisableAllHighlights()
     {
@@ -165,7 +174,14 @@ public class LensManager : MonoBehaviour
             if (evidence != null)
             {
                 evidence.Highlight(false);
+
+                if(evidence.EvidenceNode != null && evidence.EvidenceNode.EvidenceType==EEvidenceType.FOOTSTEPS)
+                {
+                    evidence.UpdateEvidenceAlpha(0f);
+                }
             }
         }
+
+        _lensObject.SetActive(false);
     }
 }

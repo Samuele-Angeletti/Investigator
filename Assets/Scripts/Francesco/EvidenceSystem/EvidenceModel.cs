@@ -1,3 +1,6 @@
+using System;
+using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class EvidenceModel : MonoBehaviour, IInteractable
@@ -20,10 +23,57 @@ public class EvidenceModel : MonoBehaviour, IInteractable
 
     [SerializeField] private Behaviour _outlineEffect;
 
+    [SerializeField] private Renderer _evidenceRenderer;
+
+
+    private MaterialPropertyBlock _propBlock;
+    private int _colorPropId;
+    private Color _originalColor;
+
     private void OnEnable()
     {
         AttemptRegistration();
     }
+    private void Awake()
+    {
+        if(_evidenceNode.EvidenceType==EEvidenceType.FOOTSTEPS)
+        {
+            _evidenceRenderer = GetComponent<Renderer>();
+        }
+       
+        if (_evidenceRenderer!=null) 
+        {
+           _propBlock= new MaterialPropertyBlock();
+
+            _colorPropId = Shader.PropertyToID("_Color");
+
+            _originalColor= _evidenceRenderer.sharedMaterial.GetColor(_colorPropId);
+
+            UpdateEvidenceAlpha(0f);
+        }
+    }
+
+    public void UpdateEvidenceAlpha(float visibility)
+    {
+        if (_evidenceRenderer == null) return;
+
+        bool shouldBeEnabled = visibility > 0.01f;
+
+        if(_evidenceRenderer.enabled!=shouldBeEnabled)
+        {
+            _evidenceRenderer.enabled= shouldBeEnabled;
+        }
+
+        if (!shouldBeEnabled) return;
+
+        Color newColor= _originalColor;
+        newColor.a = visibility;
+
+        _evidenceRenderer.GetPropertyBlock(_propBlock);
+        _propBlock.SetColor(_colorPropId, newColor);
+        _evidenceRenderer.SetPropertyBlock(_propBlock);
+    }
+
     private void Start()
     {
         AttemptRegistration();
