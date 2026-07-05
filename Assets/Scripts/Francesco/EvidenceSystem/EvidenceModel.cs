@@ -23,7 +23,9 @@ public class EvidenceModel : MonoBehaviour, IInteractable
 
     [SerializeField] private Behaviour _outlineEffect;
 
-    [SerializeField] private Renderer _evidenceRenderer;
+    [SerializeField] private LineRenderer _evidenceRenderer;
+
+    public LineRenderer EvidenceRenderer => _evidenceRenderer;
 
 
     private MaterialPropertyBlock _propBlock;
@@ -38,7 +40,7 @@ public class EvidenceModel : MonoBehaviour, IInteractable
     {
         if(_evidenceNode.EvidenceType==EEvidenceType.FOOTSTEPS)
         {
-            _evidenceRenderer = GetComponent<Renderer>();
+            _evidenceRenderer = GetComponent<LineRenderer>();
         }
        
         if (_evidenceRenderer!=null) 
@@ -68,6 +70,8 @@ public class EvidenceModel : MonoBehaviour, IInteractable
 
         Color newColor= _originalColor;
         newColor.a = visibility;
+
+        Debug.Log("Color aplha:" + newColor.a);
 
         _evidenceRenderer.GetPropertyBlock(_propBlock);
         _propBlock.SetColor(_colorPropId, newColor);
