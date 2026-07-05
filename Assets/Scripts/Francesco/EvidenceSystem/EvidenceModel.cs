@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class EvidenceModel : MonoBehaviour, IInteractable
@@ -24,6 +25,7 @@ public class EvidenceModel : MonoBehaviour, IInteractable
 
     [SerializeField] private Renderer _evidenceRenderer;
 
+
     private MaterialPropertyBlock _propBlock;
     private int _colorPropId;
     private Color _originalColor;
@@ -34,7 +36,11 @@ public class EvidenceModel : MonoBehaviour, IInteractable
     }
     private void Awake()
     {
-        _evidenceRenderer = GetComponent<Renderer>();
+        if(_evidenceNode.EvidenceType==EEvidenceType.FOOTSTEPS)
+        {
+            _evidenceRenderer = GetComponent<Renderer>();
+        }
+       
         if (_evidenceRenderer!=null) 
         {
            _propBlock= new MaterialPropertyBlock();
