@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class EvidenceModel : MonoBehaviour, IInteractable
@@ -22,7 +23,10 @@ public class EvidenceModel : MonoBehaviour, IInteractable
 
     [SerializeField] private Behaviour _outlineEffect;
 
-    [SerializeField] private Renderer _evidenceRenderer;
+    [SerializeField] private LineRenderer _evidenceRenderer;
+
+    public LineRenderer EvidenceRenderer => _evidenceRenderer;
+
 
     private MaterialPropertyBlock _propBlock;
     private int _colorPropId;
@@ -34,7 +38,11 @@ public class EvidenceModel : MonoBehaviour, IInteractable
     }
     private void Awake()
     {
-        _evidenceRenderer = GetComponent<Renderer>();
+        if(_evidenceNode.EvidenceType==EEvidenceType.FOOTSTEPS)
+        {
+            _evidenceRenderer = GetComponent<LineRenderer>();
+        }
+       
         if (_evidenceRenderer!=null) 
         {
            _propBlock= new MaterialPropertyBlock();
@@ -62,6 +70,8 @@ public class EvidenceModel : MonoBehaviour, IInteractable
 
         Color newColor= _originalColor;
         newColor.a = visibility;
+
+        Debug.Log("Color aplha:" + newColor.a);
 
         _evidenceRenderer.GetPropertyBlock(_propBlock);
         _propBlock.SetColor(_colorPropId, newColor);
