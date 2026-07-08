@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EvidenceNode
   Id: 0
   Description: A small knife
-  EvidenceModel: {fileID: 0}
+  EvidenceModel: {fileID: 5209581951812054375, guid: 94fd4632c28212c4dbc880f29c68541a, type: 3}
   EvidenceType: 0
   TruthValue: 0
   LinkedSuspect: {fileID: 11400000, guid: f622b0a9a08c0f64ebb10de13a0264e1, type: 2}
