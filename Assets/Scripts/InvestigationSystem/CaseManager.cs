@@ -4,6 +4,9 @@ using UnityEngine;
 public class CaseManager : MonoBehaviour
 {
     public static CaseManager Instance { get; private set; }
+    [SerializeField] private RandomWalkPlaceEvidences _randomWalkPlaceEvidences;
+    [SerializeField] private PointOfInterest[] _biases;
+
 
     [SerializeField] private CaseGenerator caseGenerator;
     public CaseData CurrentCase { get; private set; }
@@ -27,6 +30,12 @@ public class CaseManager : MonoBehaviour
         }
 
         CurrentCase = caseGenerator.GenerateCase(seed);
+        _randomWalkPlaceEvidences.Initialize(seed,60000, 1, Vector2Int.zero, CurrentCase.Evidences.ToArray(), _biases);
+
+        if (CurrentCase == null)
+        {
+            Debug.LogError("Case generation failed!");
+        }
         return CurrentCase;
     }
 

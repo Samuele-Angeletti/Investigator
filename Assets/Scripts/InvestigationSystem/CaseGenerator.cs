@@ -11,6 +11,9 @@ public class CaseGenerator : MonoBehaviour
     [SerializeField]
     private List<string> locations = new();
 
+    [SerializeField, Tooltip("Name of the victim for this case.")]
+    private string victimName = "Spider-Man";
+
     [SerializeField, Tooltip("Minimum/maximum number of clues generated per case (acceptance criteria: at least 3).")]
     private int minClueCount = 3;
     [SerializeField]
@@ -36,18 +39,32 @@ public class CaseGenerator : MonoBehaviour
             return null;
         }
 
+        if (EvidenceSystem.Instance == null)
+        {
+            Debug.LogError("EvidenceSystem.Instance is null! Ensure an EvidenceSystem exists in the scene.");
+            return null;
+        }
+
+        if (EvidenceSystem.Instance.Evidences == null)
+        {
+            Debug.LogError("EvidenceSystem.Instance.Evidences is null!");
+            return null;
+        }
+
         System.Random random = new System.Random(seed);
 
         CurrentCase = new CaseData
         {
             Seed = seed,
-            Victim = "Spider-Man"
+            Victim = victimName
         };
 
         CurrentCase.Culprit = suspects[random.Next(suspects.Count)];
         CurrentCase.CrimeLocation = locations[random.Next(locations.Count)];
 
-        // Clear the previous case's evidence so "in system" checks reflect only this case.
+        // Reset ID counter for a fresh case (optional)
+        _incrementalId = 0;
+
         EvidenceSystem.Instance.ResetGeneratedEvidence();
 
         GenerateEvidenceSet(CurrentCase, random);
@@ -58,51 +75,75 @@ public class CaseGenerator : MonoBehaviour
 
     private void GenerateEvidenceSet(CaseData data, System.Random random)
     {
-        var culpritPool = EvidenceSystem.Instance.Evidences
+        var allEvidence = EvidenceSystem.Instance.Evidences;
+        if (allEvidence == null || allEvidence.Count == 0)
+        {
+            Debug.LogError("No evidence assets available in EvidenceSystem!");
+            return;
+        }
+
+        // Pool of evidence linked to the culprit
+        var culpritPool = allEvidence
             .Where(e => e.LinkedSuspect == data.Culprit)
             .ToList();
 
-        if (culpritPool.Count == 0)
-        {
-            Debug.LogWarning(
-                $"No EvidenceNode assets have LinkedSuspect set to '{data.Culprit.Name}'. " +
-                "Clues for this case won't point to the culprit until some are linked in the data.");
-        }
+        // If no culprit-linked evidence exists, fallback to all evidence
+        var poolToUse = culpritPool.Count > 0 ? culpritPool : allEvidence;
 
-        int targetCount = random.Next(minClueCount, maxClueCount + 1);
+        int targetCount = Mathf.Clamp(random.Next(minClueCount, maxClueCount + 1), 0, poolToUse.Count);
 
-        for (int i = culpritPool.Count - 1; i > 0; i--)
-        {
-            int j = random.Next(i + 1);
-            (culpritPool[i], culpritPool[j]) = (culpritPool[j], culpritPool[i]);
-        }
+        // Shuffle the pool
+        ShuffleList(poolToUse, random);
 
         EvidenceNode lastAdded = null;
-        for (int i = 0; i < targetCount && i < culpritPool.Count; i++)
+        for (int i = 0; i < targetCount; i++)
         {
-            lastAdded = culpritPool[i];
+            lastAdded = poolToUse[i];
             AddEvidence(data, lastAdded);
         }
 
-        if (lastAdded != null && data.Evidences.Count < minClueCount)
+        // If we still haven't reached minClueCount, add related evidence (avoid duplicates)
+        if (data.Evidences.Count < minClueCount)
         {
-            var related = EvidenceSystem.Instance.GetPossibleEvidences(lastAdded, random);
+            // Use the last added node as a starting point, or pick a random one if none
+            EvidenceNode startNode = lastAdded ?? allEvidence[random.Next(allEvidence.Count)];
+            var related = EvidenceSystem.Instance.GetPossibleEvidences(startNode, random);
             if (related != null)
             {
+                // Shuffle related to add randomness
+                ShuffleList(related, random);
                 foreach (var node in related)
                 {
                     if (data.Evidences.Count >= maxClueCount) break;
-                    AddEvidence(data, node);
+                    // Avoid duplicates
+                    if (!data.Evidences.Contains(node))
+                        AddEvidence(data, node);
                 }
+            }
+        }
+
+        // Final safeguard: if still not enough, just pick random from all evidence
+        if (data.Evidences.Count < minClueCount)
+        {
+            var fallbackPool = allEvidence.Except(data.Evidences).ToList();
+            ShuffleList(fallbackPool, random);
+            foreach (var node in fallbackPool)
+            {
+                if (data.Evidences.Count >= minClueCount) break;
+                AddEvidence(data, node);
             }
         }
     }
 
     private void AddEvidence(CaseData data, EvidenceNode sourceNode)
     {
+        if (sourceNode == null) return;
+
+        // Avoid adding duplicates (should be already checked, but double-check)
+        if (data.Evidences.Any(e => e.SourceTemplate == sourceNode)) return;
+
         EvidenceNode runtimeNode = Instantiate(sourceNode);
         runtimeNode.Id = _incrementalId++;
-        // Keep a link to the source asset so dialogues (which reference the asset) can be matched.
         runtimeNode.SourceTemplate = sourceNode;
 
         data.Evidences.Add(runtimeNode);
@@ -116,11 +157,13 @@ public class CaseGenerator : MonoBehaviour
 
         data.CulpritPath.Add(data.CrimeLocation);
 
+        // Use Distinct to avoid duplicate entries in the path
         var pool = data.Culprit.RelatedLocations
+            .Distinct()
             .Where(loc => !data.CulpritPath.Contains(loc))
             .ToList();
 
-        ShuffleInPlace(pool, random);
+        ShuffleList(pool, random);
 
         int stepsToTake = Math.Min(desiredPathLength, pool.Count);
 
@@ -138,7 +181,7 @@ public class CaseGenerator : MonoBehaviour
         }
     }
 
-    private void ShuffleInPlace(List<string> list, System.Random random)
+    private void ShuffleList<T>(List<T> list, System.Random random)
     {
         for (int i = list.Count - 1; i > 0; i--)
         {

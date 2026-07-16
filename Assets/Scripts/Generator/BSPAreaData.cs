@@ -13,7 +13,7 @@ public class BSPAreaData : MonoBehaviour
     [Header("Refs")]
     [SerializeField] BSPDirector bspDirector;
     [SerializeField] Transform entrancePoint;
-    public EvidenceNode pointOfInterest;
+    public PointOfInterest pointOfInterest;
     public EvidenceModel spawnedPointOfInterest;
     [SerializeField] DecorativeObjectData[] decorativeObjects;
     [SerializeField] Transform[] spawnedDecorativeObjects;
@@ -39,7 +39,7 @@ public class BSPAreaData : MonoBehaviour
         {
             Width = size.x,
             Height = size.y,
-            MinPartitioningWidth = size.x/2,
+            MinPartitioningWidth = size.x / 2,
             MinPartitioningHeight = size.y / 2,
             RoomPadding = 1,
             Seed = buildBSP_Seed,
@@ -53,10 +53,14 @@ public class BSPAreaData : MonoBehaviour
         //genero il punto di interesse
         if (spawnedPointOfInterest == null)
         {
-            spawnedPointOfInterest = Instantiate(pointOfInterest.EvidenceModel, transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.randomPoint.x, 0, bspDirector.randomPoint.y), Quaternion.identity);
-            spawnedPointOfInterest.Initialize(pointOfInterest);
+            if (pointOfInterest != null && pointOfInterest.EvidenceNode != null && pointOfInterest.EvidenceNode.EvidenceModel != null)
+            {
+                spawnedPointOfInterest = Instantiate(pointOfInterest.EvidenceNode.EvidenceModel, transform.position + new Vector3(BSPArea[3].x, 0, BSPArea[3].y) + new Vector3(bspDirector.randomPoint.x, 0, bspDirector.randomPoint.y), Quaternion.identity);
+                spawnedPointOfInterest.Initialize(pointOfInterest.EvidenceNode);
+            }
         }
-        spawnedPointOfInterest.gameObject.SetActive(true);
+        if (spawnedPointOfInterest != null)
+            spawnedPointOfInterest.gameObject.SetActive(true);
 
         //genero oggetti decorativi
         if (spawnedDecorativeObjects == null || spawnedDecorativeObjects.Length == 0)
@@ -64,7 +68,7 @@ public class BSPAreaData : MonoBehaviour
         foreach (Transform t in spawnedDecorativeObjects)
         {
             t.gameObject.SetActive(true);
-        }   
+        }
     }
     /// <summary>
     /// chiamata quando esce dall'area del triggere del building

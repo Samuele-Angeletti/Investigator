@@ -54,7 +54,7 @@ public class RandomWalkPlaceEvidences : MonoBehaviour
         Vector3 center = _boxCollider.bounds.center;
         int gx = Mathf.FloorToInt((center.x - _boxCollider.bounds.min.x) / _cellSize);
         int gy = Mathf.FloorToInt((center.z - _boxCollider.bounds.min.z) / _cellSize);
-        Initialize(_seed, _steps, _walkersCount, new Vector2Int(gx, gy), _testEvidenceNodes, _biases);
+        // Initialize(_seed, _steps, _walkersCount, new Vector2Int(gx, gy), _testEvidenceNodes, _biases);
     }
 
     // ------------------------------------------------------------------------
