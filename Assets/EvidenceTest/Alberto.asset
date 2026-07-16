@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337cf8733423043428b959a80a4486b1, type: 3}
   m_Name: Alberto
   m_EditorClassIdentifier: Assembly-CSharp::Suspect
-  Name: 
+  Name: Alberto
   RelatedLocations:
   - Alberto's House
   UniqueTraits:
