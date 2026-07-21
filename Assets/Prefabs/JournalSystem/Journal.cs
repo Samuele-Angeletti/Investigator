@@ -14,6 +14,7 @@ public class Journal : Singleton<Journal>
     private List<EvidenceNode> _collectedEvidences;
     //TODO: change GameObject with actual suspect class
     private Dictionary<Suspect, List<EvidenceRow>> _suspectsEvidences;
+    public Dictionary<Suspect, List<EvidenceRow>> SuspectsEvidences => _suspectsEvidences;
     private Dictionary<EvidenceRow, EvidenceNode> _evidenceRowsNodes;
     private Dictionary<SuspectRow, Suspect> _suspectRowSuspects;
 

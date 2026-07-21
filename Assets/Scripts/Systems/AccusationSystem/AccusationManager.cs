@@ -8,6 +8,7 @@ public class AccusationManager : MonoBehaviour
     [SerializeField] Suspect trueCulprit;
 
     [Header("Refs")]
+    [SerializeField] Journal journal;
     [SerializeField] CaseGenerator caseGenerator;
 
     [SerializeField] Button[] accusationButton;
@@ -18,10 +19,11 @@ public class AccusationManager : MonoBehaviour
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
     [SerializeField] GameObject restartGamePanel;
-    public void ShowButtons ()
+
+    public void ShowButtons()
     {
         int buttonIndex = 0;
-        foreach(Suspect s in caseGenerator.suspects)
+        foreach (Suspect s in journal.SuspectsEvidences.Keys)
         {
             accusationButton[buttonIndex].gameObject.SetActive(true);
             accusationButton[buttonIndex].onClick.AddListener(() => { selectedCulprit = s; });
@@ -44,7 +46,7 @@ public class AccusationManager : MonoBehaviour
         if (selectedCulprit == null)
             return;
 
-        if(selectedCulprit == trueCulprit)
+        if (selectedCulprit == caseGenerator.CurrentCase.Culprit)
         {
             winPanel.SetActive(true);
             restartGamePanel.SetActive(true);

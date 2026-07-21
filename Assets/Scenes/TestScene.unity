@@ -1729,6 +1729,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1668147761118428241, guid: 95deb2fb87cfae7408dd40d8e0a1940b, type: 3}
+      propertyPath: _steps
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1668147761118428241, guid: 95deb2fb87cfae7408dd40d8e0a1940b, type: 3}
       propertyPath: _biases.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -2706,7 +2710,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.4, y: 2, z: 66.97}
+  m_LocalPosition: {x: -114.79, y: 2, z: -115.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4047,6 +4051,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1750324824}
+        m_TargetAssemblyTypeName: AccusationManager, Assembly-CSharp
+        m_MethodName: ShowButtons
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17939,6 +17955,10 @@ PrefabInstance:
       value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 5531642877905743114, guid: 896f127e719801a41a63b535ef088869, type: 3}
+      propertyPath: journal
+      value: 
+      objectReference: {fileID: 2044855443}
+    - target: {fileID: 5531642877905743114, guid: 896f127e719801a41a63b535ef088869, type: 3}
       propertyPath: caseGenerator
       value: 
       objectReference: {fileID: 212348126}
@@ -17953,10 +17973,22 @@ PrefabInstance:
     - target: {fileID: 5626005113311764917, guid: 896f127e719801a41a63b535ef088869, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1750324818}
+      objectReference: {fileID: 1750324824}
     - target: {fileID: 5626005113311764917, guid: 896f127e719801a41a63b535ef088869, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626005113311764917, guid: 896f127e719801a41a63b535ef088869, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ConfirmButtons
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626005113311764917, guid: 896f127e719801a41a63b535ef088869, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AccusationManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626005113311764917, guid: 896f127e719801a41a63b535ef088869, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6834996959314723914, guid: 896f127e719801a41a63b535ef088869, type: 3}
       propertyPath: m_Pivot.x
@@ -18109,6 +18141,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2491619509837537964, guid: 896f127e719801a41a63b535ef088869, type: 3}
   m_PrefabInstance: {fileID: 1750324816}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1750324824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5531642877905743114, guid: 896f127e719801a41a63b535ef088869, type: 3}
+  m_PrefabInstance: {fileID: 1750324816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750324818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d864ab193dce064c809facef046c45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AccusationManager
 --- !u!1001 &1754484851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19107,9 +19150,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 845468485872815624, guid: e6cf836fada69d34cb84954c82edb9ad, type: 3}
+      propertyPath: RotationSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 980772353723461395, guid: e6cf836fada69d34cb84954c82edb9ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35.4
+      value: -114.79
       objectReference: {fileID: 0}
     - target: {fileID: 980772353723461395, guid: e6cf836fada69d34cb84954c82edb9ad, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19117,7 +19164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 980772353723461395, guid: e6cf836fada69d34cb84954c82edb9ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 66.97
+      value: -115.28
       objectReference: {fileID: 0}
     - target: {fileID: 980772353723461395, guid: e6cf836fada69d34cb84954c82edb9ad, type: 3}
       propertyPath: m_LocalRotation.w

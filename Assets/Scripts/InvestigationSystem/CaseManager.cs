@@ -5,6 +5,7 @@ public class CaseManager : MonoBehaviour
 {
     public static CaseManager Instance { get; private set; }
     [SerializeField] private RandomWalkPlaceEvidences _randomWalkPlaceEvidences;
+    [SerializeField] private int _steps;
     [SerializeField] private PointOfInterest[] _biases;
 
 
@@ -30,7 +31,7 @@ public class CaseManager : MonoBehaviour
         }
 
         CurrentCase = caseGenerator.GenerateCase(seed);
-        _randomWalkPlaceEvidences.Initialize(seed,60000, 1, Vector2Int.zero, CurrentCase.Evidences.ToArray(), _biases);
+        _randomWalkPlaceEvidences.Initialize(seed,_steps, 1, Vector2Int.zero, CurrentCase.Evidences.ToArray(), _biases);
 
         if (CurrentCase == null)
         {
